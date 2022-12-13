@@ -19,10 +19,12 @@ public class MockClientGUI {
             }
 
         });
+
         lager.addActionListener(e -> {
             mockServer = new MockServer(AccessLevel.LAGER);
             setMockServer();
         });
+
         inköp.addActionListener(e -> {
             mockServer = new MockServer(AccessLevel.INKÖP);
             setMockServer();
