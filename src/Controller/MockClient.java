@@ -1,8 +1,12 @@
-package View;
+package Controller;
+
+
+import Model.AccessLevel;
 
 import javax.swing.*;
 
-public class MockClientGUI {
+
+public class MockClient {
     private JPanel Panel;
     private JLabel WelcomeLabel;
     private JPanel Panel2;
@@ -13,7 +17,7 @@ public class MockClientGUI {
 
     private MockServer mockServer;
 
-    public MockClientGUI() {
+    public MockClient() {
         butik.addActionListener(e -> {
             if (butik == e.getSource()) {
                 mockServer = new MockServer(AccessLevel.BUTIK);
