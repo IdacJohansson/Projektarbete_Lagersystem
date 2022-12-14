@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class MockClientGUI {
     private JPanel Panel;
@@ -11,21 +9,29 @@ public class MockClientGUI {
     private JLabel Text;
     private JButton inköp;
 
+    private MockServer mockServer;
+
     public MockClientGUI() {
         butik.addActionListener(e -> {
             if (butik == e.getSource()){
-
+                mockServer = new MockServer(AccessLevel.BUTIK);
+                setMockServer();
             }
 
-
         });
+
         lager.addActionListener(e -> {
-
-
+            mockServer = new MockServer(AccessLevel.LAGER);
+            setMockServer();
         });
+
         inköp.addActionListener(e -> {
-
-
+            mockServer = new MockServer(AccessLevel.INKÖP);
+            setMockServer();
         });
+    }
+
+    private void setMockServer(){
+
     }
 }
