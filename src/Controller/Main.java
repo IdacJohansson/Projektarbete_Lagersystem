@@ -1,10 +1,12 @@
 package Controller;
 
+import javax.swing.*;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        MockClient mockGUI = new MockClient();
+        JFrame mockGUI = new MockClient();
 
 
     }
