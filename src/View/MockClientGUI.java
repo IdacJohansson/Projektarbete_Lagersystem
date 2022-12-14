@@ -1,3 +1,5 @@
+package View;
+
 import javax.swing.*;
 
 public class MockClientGUI {
@@ -13,7 +15,7 @@ public class MockClientGUI {
 
     public MockClientGUI() {
         butik.addActionListener(e -> {
-            if (butik == e.getSource()){
+            if (butik == e.getSource()) {
                 mockServer = new MockServer(AccessLevel.BUTIK);
                 setMockServer();
             }
