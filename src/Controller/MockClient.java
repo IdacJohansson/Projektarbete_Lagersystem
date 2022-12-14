@@ -20,19 +20,18 @@ public class MockClient {
     public MockClient() {
         butik.addActionListener(e -> {
             if (butik == e.getSource()) {
-                mockServer = new MockServer(AccessLevel.BUTIK);
+                mockServer = new MockServer(mockServer, AccessLevel.BUTIK);
                 setMockServer();
             }
-
         });
 
         lager.addActionListener(e -> {
-            mockServer = new MockServer(AccessLevel.LAGER);
+            mockServer = new MockServer(mockServer, AccessLevel.LAGER);
             setMockServer();
         });
 
         inköp.addActionListener(e -> {
-            mockServer = new MockServer(AccessLevel.INKÖP);
+            mockServer = new MockServer(mockServer, AccessLevel.INKÖP);
             setMockServer();
         });
     }

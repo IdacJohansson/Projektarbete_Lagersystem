@@ -6,10 +6,12 @@ import javax.swing.*;
 
 public class MockServer {
 
-    private AccessLevel accesLevel;
+    private final AccessLevel accessLevel;
+    private final MockServer thisMockServer;
 
-    public MockServer(AccessLevel accesLevel) {
-        this.accesLevel = accesLevel;
+    public MockServer(MockServer thisMockServer, AccessLevel accesLevel) {
+        this.accessLevel = accesLevel;
+        this.thisMockServer = thisMockServer;
     }
 
 
