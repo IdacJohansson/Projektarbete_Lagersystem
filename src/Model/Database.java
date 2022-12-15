@@ -11,7 +11,7 @@ public class Database {
     protected List<Article> oneCategory;
 
 
-    Database() {
+    public Database() {
         articles = new ArrayList<>();
         oneCategory = new ArrayList<>();
     }
@@ -21,9 +21,9 @@ public class Database {
         return articles;
     }
 
-    public List<Article> getOneCategory(Garment garment) {
-        for (Article a: articles) {
-            if (a.getGarment().equals(garment)){
+    public List<Article> getCategory(Garment garment) {
+        for (Article a : articles) {
+            if (a.getGarment().equals(garment)) {
                 oneCategory.add(a);
             }
         }
@@ -67,26 +67,23 @@ public class Database {
             } else
                 return null;
         }
-
-
-
-
-        private void storeList() {
-            ObjectFileStore.storeObjectList(articles, "articles");
-        }
-
-        @SuppressWarnings("unchecked")
-        private void retrieveList() {
-            List<Article> articleList = (List<Article>) ObjectFileStore.retrieveObjectList("articles");
-            if (articleList != null) {
-                articles = articleList;
-            } else {
-                articles = new ArrayList<>();
-            }
-        }
-
+        return null;
     }
 
 
+    private void storeList() {
+        ObjectFileStore.storeObjectList(articles, "articles");
+    }
 
+
+    @SuppressWarnings("unchecked")
+    private void retrieveList() {
+        List<Article> articleList = (List<Article>) ObjectFileStore.retrieveObjectList("articles");
+        if (articleList != null) {
+            articles = articleList;
+        } else {
+            articles = new ArrayList<>();
+        }
+    }
 }
+

@@ -14,7 +14,7 @@ import java.util.List;
 public class MockServer extends JFrame {
 
     private final AccessLevel accessLevel;
-    private final Database database;
+    public final Database database;
     private DefaultListModel<String> listModel;
     private List<String> articlesAsString;
     private JFrame orderHandler;
@@ -38,7 +38,7 @@ public class MockServer extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         pack();
-       /* dropDownMenu.addActionListener(new ActionListener() {
+        dropDownMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: 12/15/2022 Add switch for dropdown alternatives
@@ -49,12 +49,12 @@ public class MockServer extends JFrame {
                     case 2 -> showList(database.getCategory(Garment.T_SHIRT));
                     case 3 -> showList(database.getCategory(Garment.KJOL));
                     case 4 -> showList(database.getCategory(Garment.KLÄNNING));
-                    case 5 -> showList(database.getList());
+                  //  case 5 -> showList(database.getList());
                 }
             }
         });
 
-        */
+
         putOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
