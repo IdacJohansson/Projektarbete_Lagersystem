@@ -37,6 +37,7 @@ public class OrderHandler extends JFrame {
             antal = Integer.parseInt(antalField.getText().trim());
             setTempArticle();
             if (tempArticle != null) {
+                if ()
                 try {
                     tempArticle.subtractFromBalance(antal);
                 } catch (IllegalArgumentException e) {
