@@ -21,6 +21,7 @@ public class OrderHandler extends JFrame {
     private JLabel felAntalLabel;
     private JLabel felArtNrLabel;
     private JButton stäng;
+    private JLabel bekräftelse;
     private String artNr;
     private int antal;
 
