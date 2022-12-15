@@ -23,7 +23,7 @@ public class NewArticle extends JFrame {
         setVisible(true);
         pack();
 
-        garment.a("Tröja", (Garment) Garment.TRÖJA);
+        //garment.a("Tröja", (Garment) Garment.TRÖJA);
         garment.addItem(Garment.BYXA);
         garment.addItem(Garment.T_SHIRT);
         garment.addItem(Garment.KJOL);
