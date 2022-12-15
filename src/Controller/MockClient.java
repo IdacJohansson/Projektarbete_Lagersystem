@@ -6,38 +6,37 @@ import Model.AccessLevel;
 import javax.swing.*;
 
 
-public class MockClient {
-    private JPanel Panel;
+public class MockClient extends JFrame {
+    private JPanel mainPanel;
     private JLabel WelcomeLabel;
     private JPanel Panel2;
     private JButton butik;
     private JButton lager;
     private JLabel Text;
     private JButton inköp;
-
-    private MockServer mockServer;
+    private JFrame mockServer;
 
     public MockClient() {
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setContentPane(mainPanel);
+        pack();
+
         butik.addActionListener(e -> {
             if (butik == e.getSource()) {
                 mockServer = new MockServer(AccessLevel.BUTIK);
-                setMockServer();
+                dispose();
             }
-
         });
 
         lager.addActionListener(e -> {
             mockServer = new MockServer(AccessLevel.LAGER);
-            setMockServer();
+            dispose();
         });
 
         inköp.addActionListener(e -> {
             mockServer = new MockServer(AccessLevel.INKÖP);
-            setMockServer();
+            dispose();
         });
-    }
-
-    private void setMockServer(){
-
     }
 }

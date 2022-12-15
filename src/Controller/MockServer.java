@@ -4,12 +4,16 @@ import Model.AccessLevel;
 
 import javax.swing.*;
 
-public class MockServer {
+public class MockServer extends JFrame {
 
-    private AccessLevel accesLevel;
+    private final AccessLevel accessLevel;
 
     public MockServer(AccessLevel accesLevel) {
-        this.accesLevel = accesLevel;
+        this.accessLevel = accesLevel;
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setContentPane(mainPanel);
+        pack();
     }
 
 
@@ -18,4 +22,5 @@ public class MockServer {
     private JButton button3;
     private JButton button4;
     private JButton button5;
+    private JPanel mainPanel;
 }

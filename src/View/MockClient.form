@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Controller.MockClient">
-  <grid id="27dc6" binding="Panel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="30" left="40" bottom="30" right="40"/>
     <constraints>
-      <xy x="20" y="20" width="431" height="402"/>
+      <xy x="20" y="20" width="446" height="402"/>
     </constraints>
     <properties>
       <background color="-1"/>
+      <preferredSize width="450" height="220"/>
     </properties>
     <border type="none"/>
     <children>
@@ -24,34 +25,34 @@
             </constraints>
             <properties>
               <font name="Anton" size="20" style="1"/>
-              <foreground color="-1"/>
+              <foreground color="-12513268"/>
               <text value="Hej och välkommen till Lagersystemet"/>
             </properties>
           </component>
-          <component id="36240" class="javax.swing.JButton" binding="Butik">
+          <component id="36240" class="javax.swing.JButton" binding="butik">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <foreground color="-1"/>
+              <foreground color="-12513268"/>
               <text value="Butik"/>
             </properties>
           </component>
-          <component id="c2102" class="javax.swing.JButton" binding="Lager">
+          <component id="c2102" class="javax.swing.JButton" binding="lager">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <foreground color="-1"/>
+              <foreground color="-12513268"/>
               <text value="Lager"/>
             </properties>
           </component>
-          <component id="40648" class="javax.swing.JButton" binding="Inköp">
+          <component id="40648" class="javax.swing.JButton" binding="inköp">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <foreground color="-1"/>
+              <foreground color="-12513268"/>
               <text value="Inköp"/>
             </properties>
           </component>
@@ -61,7 +62,7 @@
             </constraints>
             <properties>
               <font name="Anton" size="14" style="0"/>
-              <foreground color="-1"/>
+              <foreground color="-12513268"/>
               <text value="Välj avdelning:"/>
             </properties>
           </component>
