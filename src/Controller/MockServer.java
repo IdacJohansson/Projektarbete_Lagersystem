@@ -66,4 +66,8 @@ public class MockServer extends JFrame {
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
+
+    public AccessLevel getAccessLevel() {
+        return accessLevel;
+    }
 }
