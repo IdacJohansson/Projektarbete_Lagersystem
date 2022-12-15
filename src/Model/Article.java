@@ -33,7 +33,7 @@ public class Article {
         if (balance < 0) {
             throw new IllegalArgumentException("balance can't be negative");
         }
-
+        
         this.articleNumber = cleanString;
         this.garment = garment;
         this.color = color;

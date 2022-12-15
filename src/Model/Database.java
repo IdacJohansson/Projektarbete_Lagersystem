@@ -95,6 +95,10 @@ public class Database {
                 articles = new ArrayList<>();
             }
         }*/
+
+    public void createArticle(Article newArticle) {
+
+    }
 }
 
 
