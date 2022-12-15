@@ -15,6 +15,10 @@ public class MockServer extends JFrame {
     private JFrame orderHandler;
 
     private void showList(List<Article> articleList) {
+        showAll(articleList);
+        articleList.clear();
+    }
+    private void showAll(List<Article> articleList){
         articlesAsString = new ArrayList<>();
         for (Article article : articleList) {
             articlesAsString.add(article.toString());
@@ -22,7 +26,6 @@ public class MockServer extends JFrame {
         listModel = new DefaultListModel<>();
         listModel.addAll(articlesAsString);
         textField.setModel(listModel);
-        articleList.clear();
     }
 
     public MockServer(AccessLevel accesLevel) {
@@ -40,6 +43,7 @@ public class MockServer extends JFrame {
             int category = dropDownMenu.getSelectedIndex();
             switch (category) {
                 case 0 -> showList(database.getCategory(Garment.TRÖJA));
+
                 case 1 -> showList(database.getCategory(Garment.BYXA));
                 case 2 -> showList(database.getCategory(Garment.T_SHIRT));
                 case 3 -> showList(database.getCategory(Garment.KJOL));
@@ -51,7 +55,7 @@ public class MockServer extends JFrame {
             dispose();
         });
         showAllButton.addActionListener(e -> {
-            showList(database.getListOfArtNr());
+            showAll(database.getListOfArtNr());
         });
     }
 
