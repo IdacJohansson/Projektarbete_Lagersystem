@@ -32,6 +32,10 @@ public class OrderHandler extends JFrame {
     public OrderHandler(AccessLevel accessLevel) {  //tar in mockserverns accesslevel
         this.accessLevel = accessLevel;
         database = new Database();
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setContentPane(panel1);
+        pack();
 
         skicka.addActionListener(ae -> {
 

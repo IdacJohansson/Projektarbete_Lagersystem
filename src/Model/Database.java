@@ -16,10 +16,11 @@ public class Database {
 
 
 
-    private void setAnnasArticles(){    //OBS!! ska tas bort! bara för att kunna testa mina metoder (Anna)
-        Article a1 = new Article("605 14",Garment.BYXA,Color.GRÖN,Size.XL);
-        Article a2 = new Article("501 12",Garment.TRÖJA,Color.VIT,Size.XL);
-        Article a3 = new Article("901 14",Garment.KLÄNNING,Color.VIT,Size.XL);
+    public Database() {
+        annasArticles = new ArrayList<>();
+        Article a1 = new Article("605 14", Garment.BYXA, Color.GRÖN, Size.XL);
+        Article a2 = new Article("501 12", Garment.TRÖJA, Color.VIT, Size.XL);
+        Article a3 = new Article("901 14", Garment.KLÄNNING, Color.VIT, Size.XL);
         annasArticles.add(a1);
         annasArticles.add(a2);
         annasArticles.add(a3);
