@@ -8,7 +8,7 @@ public class Article {
     private final Size size;
     private int balance;
 
-    public Article(String articleNumber, Garment garment, Color color, Size size){      //OBS!! ska tas bort! bara för att kunna testa mina metoder (Anna)
+    public Article(String articleNumber, Garment garment, Color color, Size size) {      //OBS!! ska tas bort! bara för att kunna testa mina metoder (Anna)
 
         this.articleNumber = articleNumber;
         this.garment = garment;
@@ -18,19 +18,19 @@ public class Article {
     }
 
 
-    public Article(String articleNumber, Garment garment, Color color, Size size, int balance){
+    public Article(String articleNumber, Garment garment, Color color, Size size, int balance) {
         if (articleNumber == null || articleNumber.isBlank()) {
             throw new IllegalArgumentException("article number is not valid");
         }
 
-        String cleanString = articleNumber.replaceAll("\\s+","");
+        String cleanString = articleNumber.replaceAll("\\s+", "");
         if (!cleanString.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException("article number must only contain numbers");
         } else if (cleanString.length() != 7) {
             throw new IllegalArgumentException("article number is not 7 numbers");
         }
 
-        if (balance < 0){
+        if (balance < 0) {
             throw new IllegalArgumentException("balance can't be negative");
         }
 
@@ -62,14 +62,14 @@ public class Article {
     }
 
     public void setBalance(int balance) {
-        if (balance < 0){
+        if (balance < 0) {
             throw new IllegalArgumentException("balance can't be negative");
         }
         this.balance = balance;
     }
 
     public void addToBalance(int number) {
-        if (number < 0){
+        if (number < 0) {
             throw new IllegalArgumentException("you can't add a negative number to balance");
         }
         balance = balance + number;
@@ -78,9 +78,16 @@ public class Article {
     public void subtractFromBalance(int number) {
         if (number < 0) {
             throw new IllegalArgumentException("your withdraw can't be negative");
-        } else if (balance - number < 0){
+        } else if (balance - number < 0) {
             throw new IllegalArgumentException("your withdraw is larger then the balance");
         }
         balance = balance - number;
+
+
+    }
+
+    @Override
+    public String toString() {
+        return "Art NR: " + articleNumber + " - " + garment + " " + color + " " + size + " Saldo: " + balance;
     }
 }
