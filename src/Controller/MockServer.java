@@ -1,13 +1,13 @@
 package Controller;
 
-import Model.AccessLevel;
-import Model.Article;
-import Model.Database;
-import Model.Garment;
+import Model.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +17,7 @@ public class MockServer extends JFrame {
     public final Database database;
     private DefaultListModel<String> listModel;
     private List<String> articlesAsString;
+    private MouseListen mouseListen;
     private JFrame orderHandler;
 
     private void showList(List<Article> articleList) {
@@ -33,11 +34,14 @@ public class MockServer extends JFrame {
 
     public MockServer(AccessLevel accesLevel) {
         this.accessLevel = accesLevel;
+        mouseListen = new MouseListen(this);
         database = new Database();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         pack();
+        addArticle.addMouseListener(mouseListen);
+        removeArticle.addMouseListener(mouseListen);
         dropDownMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,6 +68,13 @@ public class MockServer extends JFrame {
         });
     }
 
+    public JButton getAddArticle() {
+        return addArticle;
+    }
+
+    public JButton getRemoveArticle() {
+        return removeArticle;
+    }
 
     private JPanel mainPanel;
     private JButton putOrder;
