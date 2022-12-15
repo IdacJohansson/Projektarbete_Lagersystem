@@ -1,53 +1,73 @@
 package Controller;
 
+import Model.AccessLevel;
+import Model.Article;
 import Model.Database;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class OrderHandler extends JFrame{
+public class OrderHandler extends JFrame {
     private JPanel panel1;
     private JPanel panel2;
     private JLabel headLine;
     private JTextField artNrField;
-    private JButton Skicka;
+    private JButton skicka;
     private JLabel artNrLabel;
     private JTextField antalField;
     private JLabel antalLabel;
-    private JLabel bekräftelse;
-    private Database database;
-    int artNr;
+
+    private JLabel felAntalLabel;
+    private JLabel felArtNrLabel;
+    private JButton stäng;
+    String artNr;
     int antal;
+
+    private Database database = new Database();
+    private JFrame mockServer;
+    private Article tempArticle;
+
     public OrderHandler() {
 
-        artNrField.addActionListener(e -> {
-            artNr = Integer.parseInt(artNrField.getText().trim());
-            if (!isAvailable()) {
-                bekräftelse.setText("Inget plagg med artikelnumret finns");
-            }
-        });
-        antalField.addActionListener(e -> {//lagra ner antal till antal
-            antal = Integer.parseInt(antalField.getText().trim());
-            if (!isPossible()){
-                bekräftelse.setText("Det finns inte så många tillgängliga plagg");
-            }
-        });
-        Skicka.addActionListener(e -> {
-            //TODO ta informationen från fälten och skicka Database?
-            //ALT subtractArticles();
-            this.dispose();
-        });
-    }
-    private void subtractArticles (){
-        //göra uppdateringen av listan? borde kanske istället bara ligga som ett metodanrop av setSaldo() el liknande
 
+        skicka.addActionListener(ae -> {
+
+            artNr = artNrField.getText().trim();
+            antal = Integer.parseInt(antalField.getText().trim());
+            setTempArticle();
+            if (tempArticle != null) {
+                try {
+                    tempArticle.subtractFromBalance(antal);
+                } catch (IllegalArgumentException e) {
+                    if (e.getMessage().contains("negative")) {
+                        felAntalLabel.setText("Antal måste vara större än 0");
+                    }else if (e.getMessage().contains("larger")) {
+                        felAntalLabel.setText("Det finns inte så många exemplar på lagret");
+                    }
+                }
+            } else {
+                felArtNrLabel.setText("Inget plagg med artikelnumret finns");
+            }
+
+        });
+        stäng.addActionListener(e -> {
+            mockServer = new MockServer(AccessLevel.BUTIK);
+            dispose();
+        });
     }
-    private boolean isAvailable(){
-        //kolla att artikelnumret finns i listan över saluförda produkter
-        return true;
+
+    private Article getArticle() {
+        if (database.getArticle(artNr) != null) {
+            tempArticle = database.getArticle(artNr);
+        } else {
+            tempArticle = null;
+        }
+        return tempArticle;
     }
-    private boolean isPossible(){
-       // return antal <= article.getSaldo; //kontroll att beställnignen är möjlig
-        return true;
+
+    private void setTempArticle() {
+        tempArticle = database.getArticle(artNr);
     }
 
 }
