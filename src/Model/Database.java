@@ -6,12 +6,12 @@ import java.util.List;
 
 public class Database {
 
-    private List<Article> articles;
+    protected List<Article> articles;
 
     protected List<Article> oneCategory;
 
 
-    Database() {
+    public Database() {
         articles = new ArrayList<>();
         oneCategory = new ArrayList<>();
     }
@@ -22,8 +22,8 @@ public class Database {
     }
 
     public List<Article> getOneCategory(Garment garment) {
-        for (Article a: articles) {
-            if (a.getGarment().equals(garment)){
+        for (Article a : articles) {
+            if (a.getGarment().equals(garment)) {
                 oneCategory.add(a);
             }
         }
@@ -64,18 +64,18 @@ public class Database {
         for (Article a : articles) {
             if (a.getArticleNumber().equals(artNumb)) {
                 return a;
-            } else
-                return null;
+            }
+
         }
 
+        return null;
+    }
 
-
-
-        private void storeList() {
+    /*  private void storeList() {
             ObjectFileStore.storeObjectList(articles, "articles");
-        }
+        } */
 
-        @SuppressWarnings("unchecked")
+       /* @SuppressWarnings("unchecked")
         private void retrieveList() {
             List<Article> articleList = (List<Article>) ObjectFileStore.retrieveObjectList("articles");
             if (articleList != null) {
@@ -83,10 +83,10 @@ public class Database {
             } else {
                 articles = new ArrayList<>();
             }
-        }
-
-    }
-
-
-
+        }*/
 }
+
+
+
+
+

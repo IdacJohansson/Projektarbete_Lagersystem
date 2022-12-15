@@ -38,23 +38,23 @@ public class MockServer extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         pack();
-       /* dropDownMenu.addActionListener(new ActionListener() {
+        dropDownMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: 12/15/2022 Add switch for dropdown alternatives
                 int category = dropDownMenu.getSelectedIndex();
                 switch (category) {
-                    case 0 -> showList(database.getCategory(Garment.TRÖJA));
-                    case 1 -> showList(database.getCategory(Garment.BYXA));
-                    case 2 -> showList(database.getCategory(Garment.T_SHIRT));
-                    case 3 -> showList(database.getCategory(Garment.KJOL));
-                    case 4 -> showList(database.getCategory(Garment.KLÄNNING));
-                    case 5 -> showList(database.getList());
+                    case 0 -> showList(database.getOneCategory(Garment.TRÖJA));
+                    case 1 -> showList(database.getOneCategory(Garment.BYXA));
+                    case 2 -> showList(database.getOneCategory(Garment.T_SHIRT));
+                    case 3 -> showList(database.getOneCategory(Garment.KJOL));
+                    case 4 -> showList(database.getOneCategory(Garment.KLÄNNING));
+                    case 5 -> showList(database.getListOfArtNr());
                 }
             }
         });
 
-        */
+
         putOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
