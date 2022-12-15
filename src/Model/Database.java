@@ -23,7 +23,7 @@ public class Database {
         return articles;
     }
 
-    public List<Article> getOneCategory(Garment garment) {
+    public List<Article> getCategory(Garment garment) {
         for (Article a : articles) {
             if (a.getGarment().equals(garment)) {
                 oneCategory.add(a);
@@ -77,6 +77,7 @@ public class Database {
         ObjectFileStore.storeObjectList(articles, "articles");
     }
 
+
     @SuppressWarnings("unchecked")
     private void retrieveList() {
         List<Article> articleList = (List<Article>) ObjectFileStore.retrieveObjectList("articles");
@@ -86,6 +87,8 @@ public class Database {
             articles = new ArrayList<>();
         }
     }
-
 }
+
+
+
 
