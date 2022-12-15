@@ -68,7 +68,7 @@
             </constraints>
             <properties>
               <font name="SansSerif" size="12" style="0"/>
-              <text value="text"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="9109e" class="javax.swing.JLabel" binding="felAntalLabel">
@@ -77,7 +77,7 @@
             </constraints>
             <properties>
               <font name="SansSerif" size="12" style="0"/>
-              <text value="text"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="b8525" class="javax.swing.JButton" binding="stäng">
