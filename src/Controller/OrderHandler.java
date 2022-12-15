@@ -21,15 +21,21 @@ public class OrderHandler extends JFrame {
     private JLabel felAntalLabel;
     private JLabel felArtNrLabel;
     private JButton stäng;
-    String artNr;
-    int antal;
+    private String artNr;
+    private int antal;
 
-    private Database database = new Database();
+    private Database database;
+    private AccessLevel accessLevel;
     private JFrame mockServer;
     private Article tempArticle;
 
-    public OrderHandler() {
-
+    public OrderHandler(AccessLevel accessLevel) {  //tar in mockserverns accesslevel
+        this.accessLevel = accessLevel;
+        database = new Database();
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setContentPane(panel1);
+        pack();
 
         skicka.addActionListener(ae -> {
 
@@ -37,13 +43,21 @@ public class OrderHandler extends JFrame {
             antal = Integer.parseInt(antalField.getText().trim());
             setTempArticle();
             if (tempArticle != null) {
-                try {
-                    tempArticle.subtractFromBalance(antal);
-                } catch (IllegalArgumentException e) {
-                    if (e.getMessage().contains("negative")) {
+                if (accessLevel == AccessLevel.BUTIK) {
+                    try {
+                        tempArticle.subtractFromBalance(antal);
+                    } catch (IllegalArgumentException e) {
+                        if (e.getMessage().contains("negative")) {
+                            felAntalLabel.setText("Antal måste vara större än 0");
+                        } else if (e.getMessage().contains("larger")) {
+                            felAntalLabel.setText("Det finns inte så många exemplar på lagret");
+                        }
+                    }
+                } else if (accessLevel == AccessLevel.INKÖP) {
+                    try {
+                        tempArticle.addToBalance(antal);
+                    } catch (IllegalArgumentException e) {
                         felAntalLabel.setText("Antal måste vara större än 0");
-                    }else if (e.getMessage().contains("larger")) {
-                        felAntalLabel.setText("Det finns inte så många exemplar på lagret");
                     }
                 }
             } else {
@@ -52,18 +66,9 @@ public class OrderHandler extends JFrame {
 
         });
         stäng.addActionListener(e -> {
-            mockServer = new MockServer(AccessLevel.BUTIK);
+            mockServer = new MockServer(accessLevel);
             dispose();
         });
-    }
-
-    private Article getArticle() {
-        if (database.getArticle(artNr) != null) {
-            tempArticle = database.getArticle(artNr);
-        } else {
-            tempArticle = null;
-        }
-        return tempArticle;
     }
 
     private void setTempArticle() {

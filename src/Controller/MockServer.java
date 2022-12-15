@@ -17,6 +17,7 @@ public class MockServer extends JFrame {
     private final Database database;
     private DefaultListModel<String> listModel;
     private List<String> articlesAsString;
+    private JFrame orderHandler;
 
     private void showList(List<Article> articleList) {
         articlesAsString = new ArrayList<>();
@@ -37,7 +38,7 @@ public class MockServer extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         pack();
-        dropDownMenu.addActionListener(new ActionListener() {
+       /* dropDownMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: 12/15/2022 Add switch for dropdown alternatives
@@ -50,6 +51,15 @@ public class MockServer extends JFrame {
                     case 4 -> showList(database.getCategory(Garment.KLÄNNING));
                     case 5 -> showList(database.getList());
                 }
+            }
+        });
+
+        */
+        putOrder.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                orderHandler=new OrderHandler(accessLevel);
+                dispose();
             }
         });
     }
