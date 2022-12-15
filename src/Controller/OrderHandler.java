@@ -30,11 +30,12 @@ public class OrderHandler extends JFrame {
     private JFrame mockServer;
     private Article tempArticle;
 
-    public OrderHandler(Database database, AccessLevel accessLevel) {  //tar in mockserverns accesslevel
+    public OrderHandler(MockServer mockServer, Database database, AccessLevel accessLevel) {  //tar in mockserverns accesslevel
+        this.mockServer=mockServer;
         this.accessLevel = accessLevel;
         this.database = database;
         setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setContentPane(panel1);
         pack();
 
@@ -72,7 +73,7 @@ public class OrderHandler extends JFrame {
 
         });
         stäng.addActionListener(e -> {
-            mockServer = new MockServer(accessLevel);
+            mockServer.setEnabled(true);
             dispose();
         });
     }

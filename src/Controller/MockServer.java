@@ -47,8 +47,8 @@ public class MockServer extends JFrame {
             }
         });
         putOrder.addActionListener(e -> {
-            orderHandler = new OrderHandler(database,accessLevel);
-            dispose();
+            orderHandler = new OrderHandler(this,database,accessLevel);
+            setEnabled(false);
         });
         showAllButton.addActionListener(e -> {
             showList(database.getListOfArtNr());
