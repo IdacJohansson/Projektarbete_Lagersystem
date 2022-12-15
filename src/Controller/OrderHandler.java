@@ -39,6 +39,9 @@ public class OrderHandler extends JFrame {
         pack();
 
         skicka.addActionListener(ae -> {
+            felArtNrLabel.setText("");
+            felAntalLabel.setText("");
+            bekräftelse.setText("");
 
             artNr = artNrField.getText().trim();
             antal = Integer.parseInt(antalField.getText().trim());
@@ -46,7 +49,10 @@ public class OrderHandler extends JFrame {
             if (tempArticle != null) {
                 if (accessLevel == AccessLevel.BUTIK) {
                     try {
+                        System.out.println("before subtract");
                         tempArticle.subtractFromBalance(antal);
+                        bekräftelse.setText("Beställning skickad");
+                        System.out.println("after subtract");
                     } catch (IllegalArgumentException e) {
                         if (e.getMessage().contains("negative")) {
                             felAntalLabel.setText("Antal måste vara större än 0");
@@ -57,6 +63,7 @@ public class OrderHandler extends JFrame {
                 } else if (accessLevel == AccessLevel.INKÖP) {
                     try {
                         tempArticle.addToBalance(antal);
+                        bekräftelse.setText("Beställning skickad");
                     } catch (IllegalArgumentException e) {
                         felAntalLabel.setText("Antal måste vara större än 0");
                     }
