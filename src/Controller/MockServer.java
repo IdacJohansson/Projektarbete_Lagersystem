@@ -18,9 +18,12 @@ public class MockServer extends JFrame {
 
 
     private JPanel mainPanel;
-    private JButton button1;
+    private JButton putOrder;
     private JTextField searchInput;
-    private JRadioButton pantsRadioButton;
+    private JList textField;
+    private JComboBox dropDownMenu;
+    private JButton addArticle;
+    private JButton removeArticle;
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
