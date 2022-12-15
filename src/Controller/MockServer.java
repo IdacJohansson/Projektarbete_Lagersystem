@@ -8,19 +8,25 @@ import Model.Garment;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MockServer extends JFrame {
 
     private final AccessLevel accessLevel;
     private final Database database;
-    private DefaultListModel listModel;
+    private DefaultListModel<String> listModel;
+    private List<String> articlesAsString;
 
     private void showList(List<Article> articleList) {
-        listModel = new DefaultListModel<>();
-        listModel.addAll(articleList);
-        textField.setModel(listModel);
-
+        articlesAsString = new ArrayList<>();
+        for (Article article : articleList){
+            articlesAsString.add(article.toString());
+        }
+       listModel = new DefaultListModel<>();
+       listModel.addAll(articlesAsString);
+       textField.setModel(listModel);
+       articleList.clear();
     }
 
 

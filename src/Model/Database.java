@@ -14,6 +14,8 @@ public class Database {
 
     private List<Article> annasArticles;
 
+
+
     private void setAnnasArticles(){    //OBS!! ska tas bort! bara för att kunna testa mina metoder (Anna)
         Article a1 = new Article("605 14",Garment.BYXA,Color.GRÖN,Size.XL);
         Article a2 = new Article("501 12",Garment.TRÖJA,Color.VIT,Size.XL);
