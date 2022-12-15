@@ -1,47 +1,92 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Database {
 
     private List<Article> articles;
 
+    protected List<Article> oneCategory;
+
+
+    Database() {
+        articles = new ArrayList<>();
+        oneCategory = new ArrayList<>();
+    }
+
+
+    public List<Article> getListOfArtNr() {
+        return articles;
+    }
+
+    public List<Article> getOneCategory(Garment garment) {
+        for (Article a: articles) {
+            if (a.getGarment().equals(garment)){
+                oneCategory.add(a);
+            }
+        }
+        return oneCategory;
+    }
+
+
     // create a constructor that calls retrieveList().
 
     // call storeList() in the end of every method that makes changes to the list or its objects.
 
 
-    private List<Article> annasArticles;
+    public void setListOfArtNr() {
+        Article tXS = new Article("500 06", Garment.TRÖJA, Color.SVART, Size.XS);
+        Article tS = new Article("500 08", Garment.TRÖJA, Color.SVART, Size.S);
+        Article tM = new Article("500 10", Garment.TRÖJA, Color.SVART, Size.M);
+        Article tL = new Article("500 12", Garment.TRÖJA, Color.SVART, Size.L);
 
-    private void setAnnasArticles(){    //OBS!! ska tas bort! bara för att kunna testa mina metoder (Anna)
-        Article a1 = new Article("605 14",Garment.BYXA,Color.GRÖN,Size.XL);
-        Article a2 = new Article("501 12",Garment.TRÖJA,Color.VIT,Size.XL);
-        Article a3 = new Article("901 14",Garment.KLÄNNING,Color.VIT,Size.XL);
-        annasArticles.add(a1);
-        annasArticles.add(a2);
-        annasArticles.add(a3);
+        Article bXS = new Article("500 06", Garment.BYXA, Color.VIT, Size.XS);
+        Article bS = new Article("500 08", Garment.BYXA, Color.VIT, Size.S);
+        Article bM = new Article("500 10", Garment.BYXA, Color.VIT, Size.M);
+        Article bL = new Article("500 12", Garment.BYXA, Color.VIT, Size.L);
+
+        articles.add(tXS);
+        articles.add(tS);
+        articles.add(tM);
+        articles.add(tL);
+
+        articles.add(bXS);
+        articles.add(bS);
+        articles.add(bM);
+        articles.add(bL);
+
+        //Collections.sort();
     }
 
-    private void storeList() {
-        ObjectFileStore.storeObjectList(articles, "articles");
-    }
-
-    @SuppressWarnings("unchecked")
-    private void retrieveList() {
-        List<Article> articleList = (List<Article>) ObjectFileStore.retrieveObjectList("articles");
-        if (articleList != null) {
-            articles = articleList;
-        } else {
-            articles = new ArrayList<>();
+    public Article getArticle(String artNumb) {
+        for (Article a : articles) {
+            if (a.getArticleNumber().equals(artNumb)) {
+                return a;
+            } else
+                return null;
         }
-    }
-    public Article getArticle (String artNum){
-        for (Article temp:annasArticles) {
-            if (temp.getArticleNumber().equals(artNum)){
-                return temp;
+
+
+
+
+        private void storeList() {
+            ObjectFileStore.storeObjectList(articles, "articles");
+        }
+
+        @SuppressWarnings("unchecked")
+        private void retrieveList() {
+            List<Article> articleList = (List<Article>) ObjectFileStore.retrieveObjectList("articles");
+            if (articleList != null) {
+                articles = articleList;
+            } else {
+                articles = new ArrayList<>();
             }
         }
-        return null;
+
     }
+
+
+
 }
