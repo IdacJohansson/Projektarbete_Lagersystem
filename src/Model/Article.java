@@ -82,7 +82,6 @@ public class Article {
             throw new IllegalArgumentException("your withdraw is larger then the balance");
         }
         balance = balance - number;
-        System.out.println("subtract called");
 
     }
 

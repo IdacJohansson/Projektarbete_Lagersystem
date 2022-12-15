@@ -49,10 +49,8 @@ public class OrderHandler extends JFrame {
             if (tempArticle != null) {
                 if (accessLevel == AccessLevel.BUTIK) {
                     try {
-                        System.out.println("before subtract");
                         tempArticle.subtractFromBalance(antal);
                         bekräftelse.setText("Beställning skickad");
-                        System.out.println("after subtract");
                     } catch (IllegalArgumentException e) {
                         if (e.getMessage().contains("negative")) {
                             felAntalLabel.setText("Antal måste vara större än 0");
