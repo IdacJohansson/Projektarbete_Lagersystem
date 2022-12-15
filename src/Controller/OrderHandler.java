@@ -25,14 +25,14 @@ public class OrderHandler extends JFrame {
     private String artNr;
     private int antal;
 
-    private Database database;
+    private final Database database;
     private AccessLevel accessLevel;
     private JFrame mockServer;
     private Article tempArticle;
 
-    public OrderHandler(AccessLevel accessLevel) {  //tar in mockserverns accesslevel
+    public OrderHandler(Database database, AccessLevel accessLevel) {  //tar in mockserverns accesslevel
         this.accessLevel = accessLevel;
-        database = new Database();
+        this.database = database;
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(panel1);
