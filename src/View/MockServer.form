@@ -97,8 +97,14 @@
                     <item value="T-SHIRT"/>
                     <item value="KJOL"/>
                     <item value="KLÄNNING"/>
-                    <item value="ALLT"/>
                   </model>
+                </properties>
+              </component>
+              <component id="96774" class="javax.swing.JButton" binding="showAllButton">
+                <constraints/>
+                <properties>
+                  <text value="Show stock"/>
+                  <toolTipText value="Press to show all items"/>
                 </properties>
               </component>
             </children>

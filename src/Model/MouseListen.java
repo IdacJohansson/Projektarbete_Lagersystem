@@ -32,19 +32,23 @@ public class MouseListen implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if(e.getSource().equals(mockServer.getAddArticle())){
+        if (e.getSource().equals(mockServer.getAddArticle())) {
             mockServer.getAddArticle().setBackground(Color.GREEN);
         } else if (e.getSource().equals(mockServer.getRemoveArticle())) {
             mockServer.getRemoveArticle().setBackground(Color.RED);
+        } else if (e.getSource().equals(mockServer.getShowAllButton())) {
+            mockServer.getShowAllButton().setBackground(Color.GREEN);
         }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        if(e.getSource().equals(mockServer.getAddArticle())){
+        if (e.getSource().equals(mockServer.getAddArticle())) {
             mockServer.getAddArticle().setBackground(new JButton().getBackground());
         } else if (e.getSource().equals(mockServer.getRemoveArticle())) {
             mockServer.getRemoveArticle().setBackground(new JButton().getBackground());
+        } else if (e.getSource().equals(mockServer.getShowAllButton())) {
+            mockServer.getShowAllButton().setBackground(new JButton().getBackground());
         }
     }
 }
