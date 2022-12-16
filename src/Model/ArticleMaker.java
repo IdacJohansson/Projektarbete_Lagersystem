@@ -7,13 +7,31 @@ public class ArticleMaker {
     Garment garment;
     Color color;
     Size size;
-    List<Article> articles;
+    List<Article> articlesList;
     String artNr;
     int balance;
     List<String> artNrList;
 
+    public ArticleMaker(List<Article>articleList){
+        this.articlesList =articleList;
 
-    public void setArtNrList() {
+        setArtNrList();
+    }
+
+    public void setArticlesList(){
+        for (String artNr:artNrList) {
+            balance=100;
+            addOneArticleToList(artNr,balance);
+        }
+    }
+
+    public void addOneArticleToList (String artNr, int balance){
+        garment=getGarment(artNr.substring(0,1));
+        color=getColor(artNr.substring(1,3));
+        size=getSize(artNr.substring(4));
+        articlesList.add(new Article(artNr,garment,color,size,balance));
+    }
+    private void setArtNrList() {
         artNrList = new ArrayList<>();
         String si;
         String sj;
@@ -33,9 +51,7 @@ public class ArticleMaker {
             }
         }
     }
-
-
-    public Garment getGarment(String s) {
+    private Garment getGarment(String s) {
         garment = switch (s) {
             case "5" -> Garment.SWEATER;
             case "6" -> Garment.TROUSER;
@@ -46,7 +62,7 @@ public class ArticleMaker {
         return garment;
     }
 
-    public Color getColor(String s) {
+    private Color getColor(String s) {
         color = switch (s) {
             case "00" -> Color.BLACK;
             case "01" -> Color.WHITE;
@@ -62,7 +78,7 @@ public class ArticleMaker {
         return color;
     }
 
-    public Size getSize(String s) {
+    private Size getSize(String s) {
         size = switch (s) {
             case "04" -> Size.XXS;
             case "06" -> Size.XS;
