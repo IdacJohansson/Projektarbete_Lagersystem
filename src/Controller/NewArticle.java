@@ -66,11 +66,11 @@ public class NewArticle extends JFrame {
 
     private Garment getGarmentComboBox() {
         return switch (color.getSelectedIndex()) {
-            case 1 -> Garment.TRÖJA;
+            case 1 -> Garment.SWEATER;
             case 2 -> Garment.T_SHIRT;
-            case 3 -> Garment.BYXA;
-            case 4 -> Garment.KJOL;
-            case 5 -> Garment.KLÄNNING;
+            case 3 -> Garment.TROUSER;
+            case 4 -> Garment.SKIRT;
+            case 5 -> Garment.DRESS;
             default -> null;
         };
     }
@@ -90,15 +90,15 @@ public class NewArticle extends JFrame {
 
     private Color getColorComboBox() {
         return switch (color.getSelectedIndex()) {
-            case 1 -> Color.SVART;
-            case 2 -> Color.VIT;
-            case 3 -> Color.GUL;
+            case 1 -> Color.BLACK;
+            case 2 -> Color.WHITE;
+            case 3 -> Color.YELLOW;
             case 4 -> Color.ORANGE;
-            case 5 -> Color.RÖD;
-            case 6 -> Color.LILA;
-            case 7 -> Color.BLÅ;
-            case 8 -> Color.GRÖN;
-            case 9 -> Color.ROSA;
+            case 5 -> Color.RED;
+            case 6 -> Color.PURPLE;
+            case 7 -> Color.BLUE;
+            case 8 -> Color.GREEN;
+            case 9 -> Color.PINK;
             default -> null;
         };
     }

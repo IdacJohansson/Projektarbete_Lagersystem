@@ -6,8 +6,8 @@ import Model.Database;
 import Model.Garment;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class OrderHandler extends JFrame {
     private JPanel panel1;
@@ -29,7 +29,6 @@ public class OrderHandler extends JFrame {
     private final Database database;
     private AccessLevel accessLevel;
     private JFrame mockServer;
-    private Article tempArticle;
     int categoryShown;
 
     public OrderHandler(MockServer mockServer, Database database, AccessLevel accessLevel, int category) {  //tar in mockserverns accesslevel
@@ -49,11 +48,10 @@ public class OrderHandler extends JFrame {
 
             artNr = artNrField.getText().trim();
             antal = Integer.parseInt(antalField.getText().trim());
-            setTempArticle();
-            if (tempArticle != null) {
+            if (database.getArticle(artNr) != null) {
                 if (accessLevel == AccessLevel.BUTIK) {
                     try {
-                        tempArticle.subtractFromBalance(antal);
+                        database.subtractBalance(artNr, antal);
                         bekräftelse.setText("Beställning skickad");
                     } catch (IllegalArgumentException e) {
                         if (e.getMessage().contains("negative")) {
@@ -64,7 +62,7 @@ public class OrderHandler extends JFrame {
                     }
                 } else if (accessLevel == AccessLevel.INKÖP) {
                     try {
-                        tempArticle.addToBalance(antal);
+                        database.addBalance(artNr, antal);
                         bekräftelse.setText("Beställning skickad");
                     } catch (IllegalArgumentException e) {
                         felAntalLabel.setText("Antal måste vara större än 0");
@@ -79,18 +77,22 @@ public class OrderHandler extends JFrame {
             mockServer.setEnabled(true);
             switch (categoryShown) {
                 case -1 -> mockServer.showAll(mockServer.database.getListOfArtNr());
-                case 0 -> mockServer.showList(mockServer.database.getCategory(Garment.SWEATER));
-                case 1 -> mockServer.showList(mockServer.database.getCategory(Garment.TROUSER));
-                case 2 -> mockServer.showList(mockServer.database.getCategory(Garment.T_SHIRT));
-                case 3 -> mockServer.showList(mockServer.database.getCategory(Garment.SKIRT));
-                case 4 -> mockServer.showList(mockServer.database.getCategory(Garment.DRESS));
+                case 1 -> mockServer.showList(mockServer.database.getCategory(Garment.SWEATER));
+                case 2 -> mockServer.showList(mockServer.database.getCategory(Garment.TROUSER));
+                case 3 -> mockServer.showList(mockServer.database.getCategory(Garment.T_SHIRT));
+                case 4 -> mockServer.showList(mockServer.database.getCategory(Garment.SKIRT));
+                case 5 -> mockServer.showList(mockServer.database.getCategory(Garment.DRESS));
             }
             dispose();
         });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                mockServer.setEnabled(true);
+            }
+        });
     }
 
-    private void setTempArticle() {
-        tempArticle = database.getArticle(artNr);
-    }
 
 }

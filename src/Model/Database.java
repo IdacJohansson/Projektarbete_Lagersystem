@@ -1,6 +1,5 @@
 package Model;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +58,18 @@ public class Database {
 
     public void removeArticle(String articleNr) {
         articles.remove(getArticle(articleNr));
+        storeList();
+    }
+
+    public void addBalance(String artNr, int sum) {
+        Article article = getArticle(artNr);
+        article.addToBalance(sum);
+        storeList();
+    }
+
+    public void subtractBalance(String artNr, int sum) {
+        Article article = getArticle(artNr);
+        article.subtractFromBalance(sum);
         storeList();
     }
 }

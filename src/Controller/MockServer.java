@@ -36,7 +36,6 @@ public class MockServer extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
-        pack();
         addArticle.addMouseListener(listener);
         subtractArticle.addMouseListener(listener);
         showAllButton.addMouseListener(listener);
@@ -47,32 +46,23 @@ public class MockServer extends JFrame {
         dropDownMenu.addActionListener(e -> {
             int category = dropDownMenu.getSelectedIndex();
             switch (category) {
-                case 1 -> showList(database.getCategory(Garment.TRÖJA));
-                case 2 -> showList(database.getCategory(Garment.BYXA));
+                case 0 -> showAll(database.getListOfArtNr());
+                case 1 -> showList(database.getCategory(Garment.SWEATER));
+                case 2 -> showList(database.getCategory(Garment.TROUSER));
                 case 3 -> showList(database.getCategory(Garment.T_SHIRT));
-                case 4 -> showList(database.getCategory(Garment.KJOL));
-                case 5 -> showList(database.getCategory(Garment.KLÄNNING));
+                case 4 -> showList(database.getCategory(Garment.SKIRT));
+                case 5 -> showList(database.getCategory(Garment.DRESS));
             }
         });
         putOrder.addActionListener(e -> {
-            orderHandler = new OrderHandler(this, database, this.accessLevel,category);
+            orderHandler = new OrderHandler(this, database, this.accessLevel, dropDownMenu.getSelectedIndex());
             setEnabled(false);
         });
+
         showAllButton.addActionListener(e -> {
             showAll(database.getListOfArtNr());
-            category = -1;
         });
-    }
-    private void butikAccess(){
-        addArticle.setVisible(false);
-        subtractArticle.setVisible(false);
-    }
-    private void lagerAccess(){
-        putOrder.setVisible(false);
-        addArticle.setVisible(false);
-        subtractArticle.setVisible(false);
 
-        showAllButton.addActionListener(e -> showAll(database.getListOfArtNr()));
 
         addArticle.addActionListener(e -> {
             new NewArticle(this, database);
@@ -111,6 +101,17 @@ public class MockServer extends JFrame {
         });
 
         showAll(database.getListOfArtNr());
+        pack();
+    }
+    private void butikAccess(){
+        addArticle.setVisible(false);
+        subtractArticle.setVisible(false);
+    }
+    private void lagerAccess(){
+        putOrder.setVisible(false);
+        addArticle.setVisible(false);
+        subtractArticle.setVisible(false);
+
     }
 
     protected void showList(List<Article> articleList) {
