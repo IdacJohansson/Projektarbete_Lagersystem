@@ -69,12 +69,12 @@ public class MockServer extends JFrame {
             setEnabled(false);
         });
 
-        addArticle.addActionListener(e -> {
+        createNewArticle.addActionListener(e -> {
             new NewArticle(this, database);
             setEnabled(false);
         });
 
-        removeArticle.addActionListener(e -> {
+        deleteArticle.addActionListener(e -> {
 
         });
 
