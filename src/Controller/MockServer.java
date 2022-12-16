@@ -23,7 +23,7 @@ public class MockServer extends JFrame {
     private JButton createNewArticle;
     private JButton deleteArticle;
     private String searchWord;
-    int category;
+    int category=-10;
 
 
     public MockServer(AccessLevel accessLevel) {
