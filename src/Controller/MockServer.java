@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,8 @@ public class MockServer extends JFrame {
         showAll(articleList);
         articleList.clear();
     }
-    private void showAll(List<Article> articleList){
+
+    private void showAll(List<Article> articleList) {
         articlesAsString = new ArrayList<>();
         for (Article article : articleList) {
             articlesAsString.add(article.toString());
@@ -30,6 +32,20 @@ public class MockServer extends JFrame {
 
     public MockServer(AccessLevel accesLevel) {
         this.accessLevel = accesLevel;
+        switch (accesLevel) {
+            case BUTIK -> {
+                addArticle.setVisible(false);
+                subtractArticle.setVisible(false);
+                createNewArticle.setVisible(false);
+                deleteArticle.setVisible(false);
+            }
+            case LAGER -> {
+                putOrder.setVisible(false);
+                createNewArticle.setVisible(false);
+                deleteArticle.setVisible(false);
+            }
+        }
+
         mouseListen = new MouseListen(this);
         database = new Database();
         setVisible(true);
@@ -37,8 +53,11 @@ public class MockServer extends JFrame {
         setContentPane(mainPanel);
         pack();
         addArticle.addMouseListener(mouseListen);
-        removeArticle.addMouseListener(mouseListen);
+        subtractArticle.addMouseListener(mouseListen);
         showAllButton.addMouseListener(mouseListen);
+        createNewArticle.addMouseListener(mouseListen);
+        deleteArticle.addMouseListener(mouseListen);
+        putOrder.addMouseListener(mouseListen);
         dropDownMenu.addActionListener(e -> {
             int category = dropDownMenu.getSelectedIndex();
             switch (category) {
@@ -50,7 +69,7 @@ public class MockServer extends JFrame {
             }
         });
         putOrder.addActionListener(e -> {
-            orderHandler = new OrderHandler(this,database,accessLevel);
+            orderHandler = new OrderHandler(this, database, accessLevel);
             setEnabled(false);
         });
         showAllButton.addActionListener(e -> {
@@ -63,11 +82,23 @@ public class MockServer extends JFrame {
     }
 
     public JButton getRemoveArticle() {
-        return removeArticle;
+        return subtractArticle;
     }
 
     public JButton getShowAllButton() {
         return showAllButton;
+    }
+
+    public JButton getCreateNewArticle() {
+        return createNewArticle;
+    }
+
+    public JButton getDeleteArticle() {
+        return deleteArticle;
+    }
+
+    public JButton getPutOrder() {
+        return putOrder;
     }
 
     private JPanel mainPanel;
@@ -76,8 +107,10 @@ public class MockServer extends JFrame {
     private JList textField;
     private JComboBox dropDownMenu;
     private JButton addArticle;
-    private JButton removeArticle;
+    private JButton subtractArticle;
     private JButton showAllButton;
+    private JButton createNewArticle;
+    private JButton deleteArticle;
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

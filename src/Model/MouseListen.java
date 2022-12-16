@@ -38,6 +38,12 @@ public class MouseListen implements MouseListener {
             mockServer.getRemoveArticle().setBackground(Color.RED);
         } else if (e.getSource().equals(mockServer.getShowAllButton())) {
             mockServer.getShowAllButton().setBackground(Color.GREEN);
+        } else if (e.getSource().equals(mockServer.getCreateNewArticle())) {
+            mockServer.getCreateNewArticle().setBackground(Color.GREEN);
+        } else if (e.getSource().equals(mockServer.getDeleteArticle())) {
+            mockServer.getDeleteArticle().setBackground(Color.RED);
+        } else if (e.getSource().equals(mockServer.getPutOrder())) {
+            mockServer.getPutOrder().setBackground(Color.YELLOW);
         }
     }
 
@@ -49,6 +55,12 @@ public class MouseListen implements MouseListener {
             mockServer.getRemoveArticle().setBackground(new JButton().getBackground());
         } else if (e.getSource().equals(mockServer.getShowAllButton())) {
             mockServer.getShowAllButton().setBackground(new JButton().getBackground());
+        } else if (e.getSource().equals(mockServer.getCreateNewArticle())) {
+            mockServer.getCreateNewArticle().setBackground(new JButton().getBackground());
+        } else if (e.getSource().equals(mockServer.getDeleteArticle())) {
+            mockServer.getDeleteArticle().setBackground(new JButton().getBackground());
+        } else if (e.getSource().equals(mockServer.getPutOrder())) {
+            mockServer.getPutOrder().setBackground(new JButton().getBackground());
         }
     }
 }
