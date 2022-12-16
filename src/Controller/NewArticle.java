@@ -16,7 +16,7 @@ public class NewArticle extends JFrame {
     private JTextField balanceField;
     private JButton addArticle;
 
-    public NewArticle(JFrame parentWindow, Database database) {
+    public NewArticle(Database database, MockServer mockServer) {
         setContentPane(mainPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -38,7 +38,8 @@ public class NewArticle extends JFrame {
                                     JOptionPane.showMessageDialog(null, ex);
                                 }
                                 dispose();
-                                parentWindow.setEnabled(true);
+                                mockServer.showAll(database.getListOfArtNr());
+                                mockServer.setEnabled(true);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Balance can't be negative");
                             }
@@ -59,7 +60,7 @@ public class NewArticle extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                parentWindow.setEnabled(true);
+                mockServer.setEnabled(true);
             }
         });
     }

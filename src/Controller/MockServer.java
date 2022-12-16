@@ -61,11 +61,12 @@ public class MockServer extends JFrame {
 
         showAllButton.addActionListener(e -> {
             showAll(database.getListOfArtNr());
+            dropDownMenu.setSelectedIndex(0);
         });
 
 
         addArticle.addActionListener(e -> {
-            new NewArticle(this, database);
+            new NewArticle(database, this);
             setEnabled(false);
         });
 

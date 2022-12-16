@@ -76,12 +76,12 @@ public class OrderHandler extends JFrame {
         stäng.addActionListener(e -> {
             mockServer.setEnabled(true);
             switch (categoryShown) {
-                case -1 -> mockServer.showAll(mockServer.database.getListOfArtNr());
-                case 1 -> mockServer.showList(mockServer.database.getCategory(Garment.SWEATER));
-                case 2 -> mockServer.showList(mockServer.database.getCategory(Garment.TROUSER));
-                case 3 -> mockServer.showList(mockServer.database.getCategory(Garment.T_SHIRT));
-                case 4 -> mockServer.showList(mockServer.database.getCategory(Garment.SKIRT));
-                case 5 -> mockServer.showList(mockServer.database.getCategory(Garment.DRESS));
+                case 0 -> mockServer.showAll(database.getListOfArtNr());
+                case 1 -> mockServer.showList(database.getCategory(Garment.SWEATER));
+                case 2 -> mockServer.showList(database.getCategory(Garment.TROUSER));
+                case 3 -> mockServer.showList(database.getCategory(Garment.T_SHIRT));
+                case 4 -> mockServer.showList(database.getCategory(Garment.SKIRT));
+                case 5 -> mockServer.showList(database.getCategory(Garment.DRESS));
             }
             dispose();
         });
