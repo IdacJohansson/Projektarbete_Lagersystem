@@ -14,6 +14,7 @@ public class Database {
     public Database() {
         articles = new ArrayList<>();
         oneCategory = new ArrayList<>();
+        setListOfArtNr();
     }
 
 
