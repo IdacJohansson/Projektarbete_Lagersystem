@@ -24,20 +24,12 @@ public class MockServer extends JFrame {
     private JButton deleteArticle;
     private String searchWord;
 
+
     public MockServer(AccessLevel accessLevel) {
         this.accessLevel = accessLevel;
         switch (accessLevel) {
-            case BUTIK -> {
-                addArticle.setVisible(false);
-                subtractArticle.setVisible(false);
-                createNewArticle.setVisible(false);
-                deleteArticle.setVisible(false);
-            }
-            case LAGER -> {
-                putOrder.setVisible(false);
-                createNewArticle.setVisible(false);
-                deleteArticle.setVisible(false);
-            }
+            case BUTIK -> butikAccess();
+            case LAGER -> lagerAccess();
         }
 
         listener = new Listener(this);
@@ -70,7 +62,17 @@ public class MockServer extends JFrame {
         });
         showAllButton.addActionListener(e -> showAll(database.getListOfArtNr()));
     }
-
+    private void butikAccess(){
+        addArticle.setVisible(false);
+        subtractArticle.setVisible(false);
+        createNewArticle.setVisible(false);
+        deleteArticle.setVisible(false);
+    }
+    private void lagerAccess(){
+        putOrder.setVisible(false);
+        createNewArticle.setVisible(false);
+        deleteArticle.setVisible(false);
+    }
 
     private void showList(List<Article> articleList) {
         showAll(articleList);
