@@ -74,6 +74,7 @@ public class OrderHandler extends JFrame {
         });
         stäng.addActionListener(e -> {
             mockServer.setEnabled(true);
+            mockServer.showAll(mockServer.database.getListOfArtNr());
             dispose();
         });
     }
