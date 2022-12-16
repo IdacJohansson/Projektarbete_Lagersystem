@@ -12,7 +12,7 @@ public class MockServer extends JFrame {
     public final Database database;
     private DefaultListModel<String> listModel;
     private List<String> articlesAsString;
-    private MouseListen mouseListen;
+    private Listener listener;
     private JFrame orderHandler;
     private JPanel mainPanel;
     private JButton putOrder;
@@ -24,6 +24,7 @@ public class MockServer extends JFrame {
     private JButton showAllButton;
     private JButton createNewArticle;
     private JButton deleteArticle;
+    private String searchWord;
 
     public MockServer(AccessLevel accesLevel) {
         this.accessLevel = accesLevel;
@@ -41,18 +42,20 @@ public class MockServer extends JFrame {
             }
         }
 
-        mouseListen = new MouseListen(this);
+        listener = new Listener(this);
         database = new Database();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
+        setLocationRelativeTo(null);
         pack();
-        addArticle.addMouseListener(mouseListen);
-        subtractArticle.addMouseListener(mouseListen);
-        showAllButton.addMouseListener(mouseListen);
-        createNewArticle.addMouseListener(mouseListen);
-        deleteArticle.addMouseListener(mouseListen);
-        putOrder.addMouseListener(mouseListen);
+        addArticle.addMouseListener(listener);
+        subtractArticle.addMouseListener(listener);
+        showAllButton.addMouseListener(listener);
+        createNewArticle.addMouseListener(listener);
+        deleteArticle.addMouseListener(listener);
+        putOrder.addMouseListener(listener);
+        searchInput.addFocusListener(listener);
         dropDownMenu.addActionListener(e -> {
             int category = dropDownMenu.getSelectedIndex();
             switch (category) {
@@ -72,6 +75,7 @@ public class MockServer extends JFrame {
         });
     }
 
+
     private void showList(List<Article> articleList) {
         showAll(articleList);
         articleList.clear();
@@ -86,6 +90,7 @@ public class MockServer extends JFrame {
         listModel.addAll(articlesAsString);
         textField.setModel(listModel);
     }
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
@@ -112,5 +117,13 @@ public class MockServer extends JFrame {
 
     public JButton getPutOrder() {
         return putOrder;
+    }
+
+    public JTextField getSearchInput() {
+        return searchInput;
+    }
+
+    public void setSearchWord(String searchWord) {
+        this.searchWord = searchWord;
     }
 }

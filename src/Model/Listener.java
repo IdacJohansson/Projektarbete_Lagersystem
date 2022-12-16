@@ -4,14 +4,16 @@ import Controller.MockServer;
 
 import javax.swing.*;
 import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class MouseListen implements MouseListener {
+public class Listener implements MouseListener, FocusListener {
 
     MockServer mockServer;
 
-    public MouseListen(MockServer mockServer) {
+    public Listener(MockServer mockServer) {
         this.mockServer = mockServer;
     }
 
@@ -62,5 +64,15 @@ public class MouseListen implements MouseListener {
         } else if (e.getSource().equals(mockServer.getPutOrder())) {
             mockServer.getPutOrder().setBackground(new JButton().getBackground());
         }
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+        mockServer.getSearchInput().setText("");
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        mockServer.setSearchWord(mockServer.getSearchInput().getText());
     }
 }
