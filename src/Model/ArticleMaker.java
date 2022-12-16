@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ArticleMaker {
@@ -30,6 +31,13 @@ public class ArticleMaker {
         color=getColor(artNr.substring(1,3));
         size=getSize(artNr.substring(4));
         articlesList.add(new Article(artNr,garment,color,size,balance));
+    }
+    public void removeOneArticleFromList (String artNr){
+        for (Article article:articlesList) {
+            if (article.getArticleNumber().equals(artNr)){
+                articlesList.remove(article);
+            }
+        }
     }
     private void setArtNrList() {
         artNrList = new ArrayList<>();
