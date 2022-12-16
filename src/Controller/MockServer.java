@@ -10,9 +10,7 @@ public class MockServer extends JFrame {
 
     private final AccessLevel accessLevel;
     public final Database database;
-    private DefaultListModel<String> listModel;
-    private List<String> articlesAsString;
-    private Listener listener;
+    private final Listener listener;
     private JFrame orderHandler;
     private JPanel mainPanel;
     private JButton putOrder;
@@ -26,9 +24,9 @@ public class MockServer extends JFrame {
     private JButton deleteArticle;
     private String searchWord;
 
-    public MockServer(AccessLevel accesLevel) {
-        this.accessLevel = accesLevel;
-        switch (accesLevel) {
+    public MockServer(AccessLevel accessLevel) {
+        this.accessLevel = accessLevel;
+        switch (accessLevel) {
             case BUTIK -> {
                 addArticle.setVisible(false);
                 subtractArticle.setVisible(false);
@@ -67,12 +65,10 @@ public class MockServer extends JFrame {
             }
         });
         putOrder.addActionListener(e -> {
-            orderHandler = new OrderHandler(this, database, accessLevel);
+            orderHandler = new OrderHandler(this, database, this.accessLevel);
             setEnabled(false);
         });
-        showAllButton.addActionListener(e -> {
-            showAll(database.getListOfArtNr());
-        });
+        showAllButton.addActionListener(e -> showAll(database.getListOfArtNr()));
     }
 
 
@@ -82,11 +78,11 @@ public class MockServer extends JFrame {
     }
 
     private void showAll(List<Article> articleList) {
-        articlesAsString = new ArrayList<>();
+        List<String> articlesAsString = new ArrayList<>();
         for (Article article : articleList) {
             articlesAsString.add(article.toString());
         }
-        listModel = new DefaultListModel<>();
+        DefaultListModel<String> listModel = new DefaultListModel<>();
         listModel.addAll(articlesAsString);
         textField.setModel(listModel);
     }
@@ -121,6 +117,10 @@ public class MockServer extends JFrame {
 
     public JTextField getSearchInput() {
         return searchInput;
+    }
+
+    public String getSearchWord() {
+        return searchWord;
     }
 
     public void setSearchWord(String searchWord) {
