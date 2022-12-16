@@ -1,6 +1,8 @@
 package Model;
 
-public class Article {
+import java.io.Serializable;
+
+public class Article implements Serializable {
 
     private final String articleNumber;
     private final Garment garment;
