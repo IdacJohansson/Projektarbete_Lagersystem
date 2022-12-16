@@ -8,14 +8,7 @@ public class Article {
     private final Size size;
     private int balance;
 
-    public Article(String articleNumber, Garment garment, Color color, Size size) {      //OBS!! ska tas bort! bara för att kunna testa mina metoder (Anna)
 
-        this.articleNumber = articleNumber;
-        this.garment = garment;
-        this.color = color;
-        this.size = size;
-        this.balance = 3;
-    }
 
 
     public Article(String articleNumber, Garment garment, Color color, Size size, int balance) {
@@ -26,8 +19,8 @@ public class Article {
         String cleanString = articleNumber.replaceAll("\\s+", "");
         if (!cleanString.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException("article number must only contain numbers");
-        } else if (cleanString.length() != 7) {
-            throw new IllegalArgumentException("article number is not 7 numbers");
+        } else if (cleanString.length() != 5) {
+            throw new IllegalArgumentException("article number is not 5 numbers");
         }
 
         if (balance < 0) {
