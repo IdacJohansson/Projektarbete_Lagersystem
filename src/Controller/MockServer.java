@@ -42,12 +42,12 @@ public class MockServer extends JFrame {
         dropDownMenu.addActionListener(e -> {
             int category = dropDownMenu.getSelectedIndex();
             switch (category) {
-                case 0 -> showList(database.getCategory(Garment.TRÖJA));
+                case 0 -> showList(database.getOneCategory(Garment.TRÖJA));
 
-                case 1 -> showList(database.getCategory(Garment.BYXA));
-                case 2 -> showList(database.getCategory(Garment.T_SHIRT));
-                case 3 -> showList(database.getCategory(Garment.KJOL));
-                case 4 -> showList(database.getCategory(Garment.KLÄNNING));
+                case 1 -> showList(database.getOneCategory(Garment.BYXA));
+                case 2 -> showList(database.getOneCategory(Garment.T_SHIRT));
+                case 3 -> showList(database.getOneCategory(Garment.KJOL));
+                case 4 -> showList(database.getOneCategory(Garment.KLÄNNING));
             }
         });
         putOrder.addActionListener(e -> {
@@ -79,6 +79,7 @@ public class MockServer extends JFrame {
     private JButton addArticle;
     private JButton removeArticle;
     private JButton showAllButton;
+    private JLabel headLogo;
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

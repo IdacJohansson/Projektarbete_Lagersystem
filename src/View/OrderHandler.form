@@ -14,7 +14,7 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-4989276"/>
+          <background color="-5921617"/>
         </properties>
         <border type="none"/>
         <children>
@@ -23,7 +23,8 @@
               <grid row="0" column="0" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="SansSerif" size="20" style="1"/>
+              <font name="Andale Mono" size="20" style="1"/>
+              <foreground color="-16777216"/>
               <text value="Beställning av vara"/>
             </properties>
           </component>
@@ -37,10 +38,11 @@
           </component>
           <component id="a205b" class="javax.swing.JLabel" binding="antalLabel">
             <constraints>
-              <grid row="3" column="6" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="SansSerif" size="11" style="1"/>
+              <font name="Andale Mono" size="11" style="1"/>
+              <foreground color="-1"/>
               <text value="Ange antal:"/>
             </properties>
           </component>
@@ -58,6 +60,7 @@
             </constraints>
             <properties>
               <font name="SansSerif" style="1"/>
+              <foreground color="-1"/>
               <horizontalAlignment value="0"/>
               <text value="Skicka beställning"/>
             </properties>
@@ -86,15 +89,17 @@
             </constraints>
             <properties>
               <font name="SansSerif" style="1"/>
+              <foreground color="-1"/>
               <text value="Stäng beställningsformulär"/>
             </properties>
           </component>
           <component id="cde11" class="javax.swing.JLabel" binding="artNrLabel">
             <constraints>
-              <grid row="1" column="6" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="SansSerif" size="11" style="1"/>
+              <font name="Andale Mono" size="11" style="1"/>
+              <foreground color="-1"/>
               <text value="Ange artikelnummer:"/>
             </properties>
           </component>

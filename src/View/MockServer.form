@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="186" y="20" width="1225" height="338"/>
+      <xy x="186" y="20" width="1398" height="338"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -16,12 +16,12 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-14404933"/>
+          <background color="-5921617"/>
           <foreground color="-14404933"/>
         </properties>
         <border type="none"/>
         <children>
-          <grid id="8c7e1" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="true" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="8c7e1" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -31,22 +31,15 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="ed173" class="javax.swing.JButton" binding="putOrder">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="0"/>
-                  <label value="Put order"/>
-                  <text value="Put order"/>
-                </properties>
-              </component>
               <component id="5d499" class="javax.swing.JButton" binding="addArticle">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <actionCommand value="onAddClick"/>
+                  <background color="-11119018"/>
+                  <font name="Andale Mono"/>
+                  <foreground color="-1"/>
                   <horizontalAlignment value="0"/>
                   <label value="Add article"/>
                   <text value="Add article"/>
@@ -54,13 +47,39 @@
               </component>
               <component id="432d5" class="javax.swing.JButton" binding="removeArticle">
                 <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <actionCommand value="onRemoveClick"/>
+                  <background color="-11119018"/>
+                  <font name="Andale Mono"/>
+                  <foreground color="-1"/>
                   <horizontalAlignment value="0"/>
                   <label value="Remove article"/>
                   <text value="Remove article"/>
+                </properties>
+              </component>
+              <component id="defd0" class="javax.swing.JLabel" binding="headLogo">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <icon value="Pic/MODELAGRET_MINI.png"/>
+                  <text value="Label"/>
+                  <verticalTextPosition value="1"/>
+                </properties>
+              </component>
+              <component id="ed173" class="javax.swing.JButton" binding="putOrder">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-11119018"/>
+                  <font name="Andale Mono"/>
+                  <foreground color="-1"/>
+                  <horizontalAlignment value="0"/>
+                  <label value="Put order"/>
+                  <text value="Put order"/>
                 </properties>
               </component>
             </children>
@@ -75,6 +94,8 @@
               <component id="aa732" class="javax.swing.JLabel">
                 <constraints/>
                 <properties>
+                  <font name="Andale Mono"/>
+                  <foreground color="-16777216"/>
                   <text value="Search article NR:"/>
                 </properties>
               </component>
@@ -91,6 +112,8 @@
               <component id="590a0" class="javax.swing.JComboBox" binding="dropDownMenu">
                 <constraints/>
                 <properties>
+                  <font name="Andale Mono"/>
+                  <foreground color="-1"/>
                   <model>
                     <item value="TRÖJA"/>
                     <item value="BYXA"/>
@@ -103,6 +126,9 @@
               <component id="96774" class="javax.swing.JButton" binding="showAllButton">
                 <constraints/>
                 <properties>
+                  <background color="-11119018"/>
+                  <font name="Andale Mono"/>
+                  <foreground color="-1"/>
                   <text value="Show stock"/>
                   <toolTipText value="Press to show all items"/>
                 </properties>
