@@ -23,6 +23,7 @@ public class MockServer extends JFrame {
     private JButton createNewArticle;
     private JButton deleteArticle;
     private String searchWord;
+    int category;
 
     public MockServer(AccessLevel accessLevel) {
         this.accessLevel = accessLevel;
@@ -55,7 +56,7 @@ public class MockServer extends JFrame {
         putOrder.addMouseListener(listener);
         searchInput.addFocusListener(listener);
         dropDownMenu.addActionListener(e -> {
-            int category = dropDownMenu.getSelectedIndex();
+             category = dropDownMenu.getSelectedIndex();
             switch (category) {
                 case 0 -> showList(database.getCategory(Garment.SWEATER));
                 case 1 -> showList(database.getCategory(Garment.TROUSER));
@@ -65,14 +66,17 @@ public class MockServer extends JFrame {
             }
         });
         putOrder.addActionListener(e -> {
-            orderHandler = new OrderHandler(this, database, this.accessLevel);
+            orderHandler = new OrderHandler(this, database, this.accessLevel,category);
             setEnabled(false);
         });
-        showAllButton.addActionListener(e -> showAll(database.getListOfArtNr()));
+        showAllButton.addActionListener(e -> {
+            showAll(database.getListOfArtNr());
+            category = -1;
+        });
     }
 
 
-    private void showList(List<Article> articleList) {
+    protected void showList(List<Article> articleList) {
         showAll(articleList);
         articleList.clear();
     }
@@ -85,6 +89,7 @@ public class MockServer extends JFrame {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listModel.addAll(articlesAsString);
         textField.setModel(listModel);
+
     }
 
     private void createUIComponents() {

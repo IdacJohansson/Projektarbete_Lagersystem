@@ -3,6 +3,7 @@ package Controller;
 import Model.AccessLevel;
 import Model.Article;
 import Model.Database;
+import Model.Garment;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -29,11 +30,13 @@ public class OrderHandler extends JFrame {
     private AccessLevel accessLevel;
     private JFrame mockServer;
     private Article tempArticle;
+    int categoryShown;
 
-    public OrderHandler(MockServer mockServer, Database database, AccessLevel accessLevel) {  //tar in mockserverns accesslevel
-        this.mockServer=mockServer;
+    public OrderHandler(MockServer mockServer, Database database, AccessLevel accessLevel, int category) {  //tar in mockserverns accesslevel
+        this.mockServer = mockServer;
         this.accessLevel = accessLevel;
         this.database = database;
+        this.categoryShown = category;
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setContentPane(panel1);
@@ -74,7 +77,14 @@ public class OrderHandler extends JFrame {
         });
         stäng.addActionListener(e -> {
             mockServer.setEnabled(true);
-            mockServer.showAll(mockServer.database.getListOfArtNr());
+            switch (categoryShown) {
+                case -1 -> mockServer.showAll(mockServer.database.getListOfArtNr());
+                case 0 -> mockServer.showList(mockServer.database.getCategory(Garment.SWEATER));
+                case 1 -> mockServer.showList(mockServer.database.getCategory(Garment.TROUSER));
+                case 2 -> mockServer.showList(mockServer.database.getCategory(Garment.T_SHIRT));
+                case 3 -> mockServer.showList(mockServer.database.getCategory(Garment.SKIRT));
+                case 4 -> mockServer.showList(mockServer.database.getCategory(Garment.DRESS));
+            }
             dispose();
         });
     }
