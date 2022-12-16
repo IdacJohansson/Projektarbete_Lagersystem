@@ -14,21 +14,16 @@ public class MockServer extends JFrame {
     private List<String> articlesAsString;
     private MouseListen mouseListen;
     private JFrame orderHandler;
-
-    private void showList(List<Article> articleList) {
-        showAll(articleList);
-        articleList.clear();
-    }
-
-    private void showAll(List<Article> articleList) {
-        articlesAsString = new ArrayList<>();
-        for (Article article : articleList) {
-            articlesAsString.add(article.toString());
-        }
-        listModel = new DefaultListModel<>();
-        listModel.addAll(articlesAsString);
-        textField.setModel(listModel);
-    }
+    private JPanel mainPanel;
+    private JButton putOrder;
+    private JTextField searchInput;
+    private JList textField;
+    private JComboBox dropDownMenu;
+    private JButton addArticle;
+    private JButton subtractArticle;
+    private JButton showAllButton;
+    private JButton createNewArticle;
+    private JButton deleteArticle;
 
     public MockServer(AccessLevel accesLevel) {
         this.accessLevel = accesLevel;
@@ -77,6 +72,24 @@ public class MockServer extends JFrame {
         });
     }
 
+    private void showList(List<Article> articleList) {
+        showAll(articleList);
+        articleList.clear();
+    }
+
+    private void showAll(List<Article> articleList) {
+        articlesAsString = new ArrayList<>();
+        for (Article article : articleList) {
+            articlesAsString.add(article.toString());
+        }
+        listModel = new DefaultListModel<>();
+        listModel.addAll(articlesAsString);
+        textField.setModel(listModel);
+    }
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
+
     public JButton getAddArticle() {
         return addArticle;
     }
@@ -99,24 +112,5 @@ public class MockServer extends JFrame {
 
     public JButton getPutOrder() {
         return putOrder;
-    }
-
-    private JPanel mainPanel;
-    private JButton putOrder;
-    private JTextField searchInput;
-    private JList textField;
-    private JComboBox dropDownMenu;
-    private JButton addArticle;
-    private JButton subtractArticle;
-    private JButton showAllButton;
-    private JButton createNewArticle;
-    private JButton deleteArticle;
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
-
-    public AccessLevel getAccessLevel() {
-        return accessLevel;
     }
 }
