@@ -43,7 +43,6 @@ public class MockServer extends JFrame {
             int category = dropDownMenu.getSelectedIndex();
             switch (category) {
                 case 0 -> showList(database.getCategory(Garment.TRÖJA));
-
                 case 1 -> showList(database.getCategory(Garment.BYXA));
                 case 2 -> showList(database.getCategory(Garment.T_SHIRT));
                 case 3 -> showList(database.getCategory(Garment.KJOL));
