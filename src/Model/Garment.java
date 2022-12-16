@@ -1,9 +1,9 @@
 package Model;
 
 public enum Garment {
-    TRÖJA,
-    BYXA,
+    SWEATER,
+    TROUSER,
     T_SHIRT,
-    KJOL,
-    KLÄNNING
+    SKIRT,
+    DRESS
 }
