@@ -20,11 +20,8 @@ public class MockServer extends JFrame {
     private JButton addArticle;
     private JButton subtractArticle;
     private JButton showAllButton;
-    private JButton createNewArticle;
-    private JButton deleteArticle;
+    private JButton searchButton;
     private String searchWord;
-    int category=-10;
-
 
     public MockServer(AccessLevel accessLevel) {
         this.accessLevel = accessLevel;
@@ -43,18 +40,18 @@ public class MockServer extends JFrame {
         addArticle.addMouseListener(listener);
         subtractArticle.addMouseListener(listener);
         showAllButton.addMouseListener(listener);
-        createNewArticle.addMouseListener(listener);
-        deleteArticle.addMouseListener(listener);
+        addArticle.addMouseListener(listener);
+        subtractArticle.addMouseListener(listener);
         putOrder.addMouseListener(listener);
         searchInput.addFocusListener(listener);
         dropDownMenu.addActionListener(e -> {
-             category = dropDownMenu.getSelectedIndex();
+            int category = dropDownMenu.getSelectedIndex();
             switch (category) {
-                case 0 -> showList(database.getCategory(Garment.SWEATER));
-                case 1 -> showList(database.getCategory(Garment.TROUSER));
-                case 2 -> showList(database.getCategory(Garment.T_SHIRT));
-                case 3 -> showList(database.getCategory(Garment.SKIRT));
-                case 4 -> showList(database.getCategory(Garment.DRESS));
+                case 1 -> showList(database.getCategory(Garment.TRÖJA));
+                case 2 -> showList(database.getCategory(Garment.BYXA));
+                case 3 -> showList(database.getCategory(Garment.T_SHIRT));
+                case 4 -> showList(database.getCategory(Garment.KJOL));
+                case 5 -> showList(database.getCategory(Garment.KLÄNNING));
             }
         });
         putOrder.addActionListener(e -> {
@@ -69,13 +66,51 @@ public class MockServer extends JFrame {
     private void butikAccess(){
         addArticle.setVisible(false);
         subtractArticle.setVisible(false);
-        createNewArticle.setVisible(false);
-        deleteArticle.setVisible(false);
     }
     private void lagerAccess(){
         putOrder.setVisible(false);
-        createNewArticle.setVisible(false);
-        deleteArticle.setVisible(false);
+        addArticle.setVisible(false);
+        subtractArticle.setVisible(false);
+
+        showAllButton.addActionListener(e -> showAll(database.getListOfArtNr()));
+
+        addArticle.addActionListener(e -> {
+            new NewArticle(this, database);
+            setEnabled(false);
+        });
+
+        subtractArticle.addActionListener(e -> {
+            while (true) {
+                String input = JOptionPane.showInputDialog(null, "Enter article number to remove");
+                if (input == null) {
+                    break;
+                }
+                if (input.trim().chars().allMatch(Character::isDigit) && input.trim().length() == 7) {
+                    if (database.getArticle(input.trim()) != null) {
+                        database.removeArticle(input.trim());
+                        JOptionPane.showMessageDialog(null, "Article was removed");
+                        break;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Article with that number was not found");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Article number must be 7 digits without space.");
+                }
+            }
+        });
+
+        searchButton.addActionListener(e -> {
+            if (checkArticleNrString(searchInput.getText())) {
+                List<String> articleAsString = new ArrayList<>();
+                articleAsString.add(database.getArticle(searchInput.getText()).toString());
+                DefaultListModel<String> listModel = new DefaultListModel<>();
+                listModel.addAll(articleAsString);
+                textField.setModel(listModel);
+            }
+        });
+
+        showAll(database.getListOfArtNr());
     }
 
     protected void showList(List<Article> articleList) {
@@ -91,7 +126,15 @@ public class MockServer extends JFrame {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listModel.addAll(articlesAsString);
         textField.setModel(listModel);
+    }
 
+    private boolean checkArticleNrString(String s){
+        if (s.trim().chars().allMatch(Character::isDigit) && s.trim().length() == 7) {
+            if (database.getArticle(s.trim()) != null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void createUIComponents() {
@@ -108,14 +151,6 @@ public class MockServer extends JFrame {
 
     public JButton getShowAllButton() {
         return showAllButton;
-    }
-
-    public JButton getCreateNewArticle() {
-        return createNewArticle;
-    }
-
-    public JButton getDeleteArticle() {
-        return deleteArticle;
     }
 
     public JButton getPutOrder() {

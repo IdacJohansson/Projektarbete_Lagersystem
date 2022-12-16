@@ -21,7 +21,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="8c7e1" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="8c7e1" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -31,35 +31,20 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="ed173" class="javax.swing.JButton" binding="putOrder">
+              <component id="432d5" class="javax.swing.JButton" binding="subtractArticle">
                 <constraints>
-                  <grid row="0" column="0" row-span="2" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <actionCommand value="onRemoveClick"/>
                   <horizontalAlignment value="0"/>
-                  <label value="Put order"/>
-                  <text value="Put order"/>
-                </properties>
-              </component>
-              <component id="bdafe" class="javax.swing.JButton" binding="deleteArticle">
-                <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Delete article"/>
-                </properties>
-              </component>
-              <component id="3894e" class="javax.swing.JButton" binding="createNewArticle">
-                <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Create new article"/>
+                  <label value="Subtract article"/>
+                  <text value="Subtract article"/>
                 </properties>
               </component>
               <component id="5d499" class="javax.swing.JButton" binding="addArticle">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <actionCommand value="onAddClick"/>
@@ -68,15 +53,14 @@
                   <text value="Add article"/>
                 </properties>
               </component>
-              <component id="432d5" class="javax.swing.JButton" binding="subtractArticle">
+              <component id="ed173" class="javax.swing.JButton" binding="putOrder">
                 <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <actionCommand value="onRemoveClick"/>
                   <horizontalAlignment value="0"/>
-                  <label value="Subtract article"/>
-                  <text value="Subtract article"/>
+                  <label value="Put order"/>
+                  <text value="Put order"/>
                 </properties>
               </component>
             </children>
@@ -112,10 +96,18 @@
                   </component>
                 </children>
               </grid>
+              <component id="8edfc" class="javax.swing.JButton" binding="searchButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <actionCommand value="onSearchButtonClick"/>
+                  <text value="Search"/>
+                </properties>
+              </component>
               <component id="590a0" class="javax.swing.JComboBox" binding="dropDownMenu">
                 <constraints/>
                 <properties>
                   <model>
+                    <item value=""/>
                     <item value="TRÖJA"/>
                     <item value="BYXA"/>
                     <item value="T-SHIRT"/>
@@ -127,7 +119,7 @@
               <component id="96774" class="javax.swing.JButton" binding="showAllButton">
                 <constraints/>
                 <properties>
-                  <text value="Show stock"/>
+                  <text value="Show All"/>
                   <toolTipText value="Press to show all items"/>
                 </properties>
               </component>

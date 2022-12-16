@@ -1,15 +1,14 @@
 package Model;
 
-public class Article {
+import java.io.Serializable;
+
+public class Article implements Serializable {
 
     private final String articleNumber;
     private final Garment garment;
     private final Color color;
     private final Size size;
     private int balance;
-
-
-
 
     public Article(String articleNumber, Garment garment, Color color, Size size, int balance) {
         if (articleNumber == null || articleNumber.isBlank()) {
@@ -19,14 +18,14 @@ public class Article {
         String cleanString = articleNumber.replaceAll("\\s+", "");
         if (!cleanString.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException("article number must only contain numbers");
-        } else if (cleanString.length() != 5) {
-            throw new IllegalArgumentException("article number is not 5 numbers");
+        } else if (cleanString.length() != 7) {
+            throw new IllegalArgumentException("article number is not 7 numbers");
         }
 
         if (balance < 0) {
             throw new IllegalArgumentException("balance can't be negative");
         }
-
+        
         this.articleNumber = cleanString;
         this.garment = garment;
         this.color = color;
