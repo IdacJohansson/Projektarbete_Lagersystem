@@ -8,6 +8,8 @@ import Model.Garment;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class OrderHandler extends JFrame {
     private JPanel panel1;
@@ -28,7 +30,7 @@ public class OrderHandler extends JFrame {
 
     private final Database database;
     private AccessLevel accessLevel;
-    private JFrame mockServer;
+    private final JFrame mockServer;
     private Article tempArticle;
     int categoryShown;
 
@@ -86,6 +88,21 @@ public class OrderHandler extends JFrame {
                 case 4 -> mockServer.showList(mockServer.database.getCategory(Garment.DRESS));
             }
             dispose();
+        });
+
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent) {
+                mockServer.setEnabled(true);
+                switch (categoryShown) {
+                    case -1 -> mockServer.showAll(mockServer.database.getListOfArtNr());
+                    case 0 -> mockServer.showList(mockServer.database.getCategory(Garment.SWEATER));
+                    case 1 -> mockServer.showList(mockServer.database.getCategory(Garment.TROUSER));
+                    case 2 -> mockServer.showList(mockServer.database.getCategory(Garment.T_SHIRT));
+                    case 3 -> mockServer.showList(mockServer.database.getCategory(Garment.SKIRT));
+                    case 4 -> mockServer.showList(mockServer.database.getCategory(Garment.DRESS));
+                }
+                dispose();
+            }
         });
     }
 
