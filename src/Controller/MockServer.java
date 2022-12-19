@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,54 +10,160 @@ public class MockServer extends JFrame {
 
     private final AccessLevel accessLevel;
     public final Database database;
-    private DefaultListModel<String> listModel;
-    private List<String> articlesAsString;
-    private MouseListen mouseListen;
+    private final Listener listener;
     private JFrame orderHandler;
+    private JPanel mainPanel;
+    private JButton putOrder;
+    private JTextField searchInput;
+    private JList textField;
+    private JComboBox dropDownMenu;
+    private JButton addArticle;
+    private JButton subtractArticle;
+    private JButton showAllButton;
+    private JButton searchButton;
+    private JButton setBalance;
+    private String searchWord;
 
-    private void showList(List<Article> articleList) {
-        showAll(articleList);
-        articleList.clear();
-    }
-    private void showAll(List<Article> articleList){
-        articlesAsString = new ArrayList<>();
-        for (Article article : articleList) {
-            articlesAsString.add(article.toString());
+    public MockServer(AccessLevel accessLevel) {
+        this.accessLevel = accessLevel;
+        switch (accessLevel) {
+            case BUTIK -> butikAccess();
+            case LAGER -> lagerAccess();
         }
-        listModel = new DefaultListModel<>();
-        listModel.addAll(articlesAsString);
-        textField.setModel(listModel);
-    }
 
-    public MockServer(AccessLevel accesLevel) {
-        this.accessLevel = accesLevel;
-        mouseListen = new MouseListen(this);
+        listener = new Listener(this);
         database = new Database();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
-        pack();
-        addArticle.addMouseListener(mouseListen);
-        removeArticle.addMouseListener(mouseListen);
-        showAllButton.addMouseListener(mouseListen);
+        setLocationRelativeTo(null);
+        addArticle.addMouseListener(listener);
+        subtractArticle.addMouseListener(listener);
+        showAllButton.addMouseListener(listener);
+        addArticle.addMouseListener(listener);
+        subtractArticle.addMouseListener(listener);
+        putOrder.addMouseListener(listener);
+        searchInput.addFocusListener(listener);
         dropDownMenu.addActionListener(e -> {
             int category = dropDownMenu.getSelectedIndex();
             switch (category) {
-                case 0 -> showList(database.getOneCategory(Garment.TRÖJA));
-
-                case 1 -> showList(database.getOneCategory(Garment.BYXA));
-                case 2 -> showList(database.getOneCategory(Garment.T_SHIRT));
-                case 3 -> showList(database.getOneCategory(Garment.KJOL));
-                case 4 -> showList(database.getOneCategory(Garment.KLÄNNING));
+                case 0 -> showAll(database.getListOfArtNr());
+                case 1 -> showList(database.getCategory(Garment.SWEATER));
+                case 2 -> showList(database.getCategory(Garment.TROUSER));
+                case 3 -> showList(database.getCategory(Garment.T_SHIRT));
+                case 4 -> showList(database.getCategory(Garment.SKIRT));
+                case 5 -> showList(database.getCategory(Garment.DRESS));
             }
         });
         putOrder.addActionListener(e -> {
-            orderHandler = new OrderHandler(this,database,accessLevel);
+            orderHandler = new OrderHandler(this, database, this.accessLevel, dropDownMenu.getSelectedIndex());
             setEnabled(false);
         });
+
         showAllButton.addActionListener(e -> {
             showAll(database.getListOfArtNr());
+            dropDownMenu.setSelectedIndex(0);
         });
+
+
+        addArticle.addActionListener(e -> {
+            new NewArticle(database, this);
+            setEnabled(false);
+        });
+
+        subtractArticle.addActionListener(e -> {
+            while (true) {
+                String input = JOptionPane.showInputDialog(null, "Enter article number to remove");
+                if (input == null) {
+                    break;
+                }
+                if (input.trim().chars().allMatch(Character::isDigit) && input.trim().length() == 7) {
+                    if (database.getArticle(input.trim()) != null) {
+                        database.removeArticle(input.trim());
+                        JOptionPane.showMessageDialog(null, "Article was removed");
+                        break;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Article with that number was not found");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Article number must be 7 digits without space.");
+                }
+            }
+        });
+
+        searchButton.addActionListener(e -> {
+            if (checkArticleNrString(searchInput.getText())) {
+                List<String> articleAsString = new ArrayList<>();
+                articleAsString.add(database.getArticle(searchInput.getText()).toString());
+                DefaultListModel<String> listModel = new DefaultListModel<>();
+                listModel.addAll(articleAsString);
+                textField.setModel(listModel);
+            }
+        });
+
+        setBalance.addActionListener(e -> {
+            String articleString = (String) textField.getSelectedValue();
+            if (articleString != null) {
+                String articleNr = articleString.substring(8, 16);
+                while(true) {
+                    String sum = JOptionPane.showInputDialog(null, "Enter new balance for: " + articleNr);
+                    if (sum == null) {
+                        return;
+                    }
+                    sum = sum.trim();
+                    if ( !sum.isBlank() && sum.chars().allMatch(Character::isDigit) && Integer.parseInt(sum) > 0) {
+                        database.setBalance(articleNr.trim(), Integer.parseInt(sum));
+                        showAll(database.getListOfArtNr());
+                        break;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "balance need to be a digit and can't be negative");
+                    }
+                }
+            }
+        });
+
+        showAll(database.getListOfArtNr());
+        pack();
+    }
+    private void butikAccess(){
+        setBalance.setVisible(false);
+        addArticle.setVisible(false);
+        subtractArticle.setVisible(false);
+    }
+    private void lagerAccess(){
+        putOrder.setVisible(false);
+        addArticle.setVisible(false);
+        subtractArticle.setVisible(false);
+
+    }
+
+    protected void showList(List<Article> articleList) {
+        showAll(articleList);
+        articleList.clear();
+    }
+
+    protected void showAll(List<Article> articleList) {
+        List<String> articlesAsString = new ArrayList<>();
+        for (Article article : articleList) {
+            articlesAsString.add(article.toString());
+        }
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        listModel.addAll(articlesAsString);
+        textField.setModel(listModel);
+    }
+
+    private boolean checkArticleNrString(String s){
+        if (s.trim().chars().allMatch(Character::isDigit) && s.trim().length() == 7) {
+            if (database.getArticle(s.trim()) != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 
     public JButton getAddArticle() {
@@ -64,28 +171,26 @@ public class MockServer extends JFrame {
     }
 
     public JButton getRemoveArticle() {
-        return removeArticle;
+        return subtractArticle;
     }
 
     public JButton getShowAllButton() {
         return showAllButton;
     }
 
-    private JPanel mainPanel;
-    private JButton putOrder;
-    private JTextField searchInput;
-    private JList textField;
-    private JComboBox dropDownMenu;
-    private JButton addArticle;
-    private JButton removeArticle;
-    private JButton showAllButton;
-    private JLabel headLogo;
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+    public JButton getPutOrder() {
+        return putOrder;
     }
 
-    public AccessLevel getAccessLevel() {
-        return accessLevel;
+    public JTextField getSearchInput() {
+        return searchInput;
+    }
+
+    public String getSearchWord() {
+        return searchWord;
+    }
+
+    public void setSearchWord(String searchWord) {
+        this.searchWord = searchWord;
     }
 }
