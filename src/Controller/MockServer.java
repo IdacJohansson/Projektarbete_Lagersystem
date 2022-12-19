@@ -18,7 +18,7 @@ public class MockServer extends JFrame {
         showAll(articleList);
         articleList.clear();
     }
-    private void showAll(List<Article> articleList){
+    void showAll(List<Article> articleList){
         articlesAsString = new ArrayList<>();
         for (Article article : articleList) {
             articlesAsString.add(article.toString());
