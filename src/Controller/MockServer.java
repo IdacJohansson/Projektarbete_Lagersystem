@@ -124,7 +124,7 @@ public class MockServer extends JFrame {
                 sum = sum.trim();
                 if (!sum.isBlank() && sum.chars().allMatch(Character::isDigit) && Integer.parseInt(sum) > 0) {
                     database.setBalance(articleNr.trim(), Integer.parseInt(sum));
-                    showAll(database.getListOfArtNr());
+                    showSelectedList(dropDownMenu.getSelectedIndex());
                     break;
                 } else {
                     JOptionPane.showMessageDialog(null, "balance need to be a digit and can't be negative");
@@ -148,6 +148,20 @@ public class MockServer extends JFrame {
     }
 
     protected void showList(List<Article> articleList) {
+        showAll(articleList);
+        articleList.clear();
+    }
+
+    protected void showSelectedList (int category){
+        List<Article> articleList= switch (category) {
+            case 0 -> (database.getListOfArtNr());
+            case 1 -> (database.getCategory(Garment.SWEATER));
+            case 2 -> (database.getCategory(Garment.TROUSER));
+            case 3 -> (database.getCategory(Garment.T_SHIRT));
+            case 4 -> (database.getCategory(Garment.SKIRT));
+            case 5 -> (database.getCategory(Garment.DRESS));
+            default -> throw new IllegalStateException("Unexpected value: " + category);
+        };
         showAll(articleList);
         articleList.clear();
     }
