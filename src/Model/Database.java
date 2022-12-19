@@ -7,9 +7,11 @@ public class Database {
 
     protected List<Article> articles;
     protected List<Article> selection;
+    protected ArticleMaker articleMaker;
 
 
     public Database() {
+
         retrieveList();
         selection = new ArrayList<>();
     }
@@ -57,7 +59,8 @@ public class Database {
         if (articleList != null) {
             articles = articleList;
         } else {
-            articles = new ArrayList<>();
+            articleMaker = new ArticleMaker(articleList);
+            articleMaker.setArticlesList();
         }
     }
 
