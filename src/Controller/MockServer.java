@@ -21,6 +21,7 @@ public class MockServer extends JFrame {
     private JButton subtractArticle;
     private JButton showAllButton;
     private JButton searchButton;
+    private JButton setBalance;
     private String searchWord;
 
     public MockServer(AccessLevel accessLevel) {
@@ -101,10 +102,32 @@ public class MockServer extends JFrame {
             }
         });
 
+        setBalance.addActionListener(e -> {
+            String articleString = (String) textField.getSelectedValue();
+            if (articleString != null) {
+                String articleNr = articleString.substring(8, 16);
+                while(true) {
+                    String sum = JOptionPane.showInputDialog(null, "Enter new balance for: " + articleNr);
+                    if (sum == null) {
+                        return;
+                    }
+                    sum = sum.trim();
+                    if ( !sum.isBlank() && sum.chars().allMatch(Character::isDigit) && Integer.parseInt(sum) > 0) {
+                        database.setBalance(articleNr.trim(), Integer.parseInt(sum));
+                        showAll(database.getListOfArtNr());
+                        break;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "balance need to be a digit and can't be negative");
+                    }
+                }
+            }
+        });
+
         showAll(database.getListOfArtNr());
         pack();
     }
     private void butikAccess(){
+        setBalance.setVisible(false);
         addArticle.setVisible(false);
         subtractArticle.setVisible(false);
     }
