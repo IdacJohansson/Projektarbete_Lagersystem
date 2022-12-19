@@ -61,6 +61,7 @@ public class Database {
             articles = articleList;
         } else {
             articles = new ArrayList<>();
+            storeList();
         }
     }
 
