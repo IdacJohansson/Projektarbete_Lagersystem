@@ -137,13 +137,14 @@ public class MockServer extends JFrame {
         setBalance.setVisible(false);
         addArticle.setVisible(false);
         subtractArticle.setVisible(false);
+        lowBalance.setVisible(false);
     }
 
     private void lagerAccess() {
         putOrder.setVisible(false);
         addArticle.setVisible(false);
         subtractArticle.setVisible(false);
-
+        lowBalance.setVisible(false);
     }
 
     protected void showList(List<Article> articleList) {
