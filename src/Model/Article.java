@@ -74,7 +74,6 @@ public class Article implements Serializable {
             throw new IllegalArgumentException("your withdraw is larger then the balance");
         }
         balance = balance - number;
-
     }
 
     @Override
