@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.AccessLevel;
-import Model.Article;
 import Model.Database;
 import Model.Garment;
 
@@ -16,8 +15,8 @@ public class OrderHandler extends JFrame {
     private JTextField artNrField;
     private JButton skicka;
     private JLabel artNrLabel;
-    private JTextField antalField;
-    private JLabel antalLabel;
+    private JTextField quantityField;
+    private JLabel quantityLabel;
 
     private JLabel felAntalLabel;
     private JLabel felArtNrLabel;
@@ -47,7 +46,7 @@ public class OrderHandler extends JFrame {
             bekräftelse.setText("");
 
             artNr = artNrField.getText().trim();
-            antal = Integer.parseInt(antalField.getText().trim());
+            antal = Integer.parseInt(quantityField.getText().trim());
             if (database.getArticle(artNr) != null) {
                 if (accessLevel == AccessLevel.BUTIK) {
                     try {

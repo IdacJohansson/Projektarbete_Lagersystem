@@ -22,6 +22,7 @@ public class MockServer extends JFrame {
     private JButton showAllButton;
     private JButton searchButton;
     private JButton setBalance;
+    private JLabel headLogo;
     private String searchWord;
 
     public MockServer(AccessLevel accessLevel) {

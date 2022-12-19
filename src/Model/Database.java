@@ -9,10 +9,12 @@ public class Database {
     protected List<Article> oneCategory;
 
 
+
     public Database() {
         retrieveList();
         oneCategory = new ArrayList<>();
     }
+
 
 
     public List<Article> getListOfArtNr() {
