@@ -45,7 +45,7 @@ public class MockServer extends JFrame {
         searchInput.addFocusListener(listener);
         dropDownMenu.addActionListener(e -> {
             int category = dropDownMenu.getSelectedIndex();
-            switch (category) {
+            /*switch (category) {
                 case 0 -> showAll(database.getListOfArtNr());
                 case 1 -> showList(database.getCategory(Garment.SWEATER));
                 case 2 -> showList(database.getCategory(Garment.TROUSER));
@@ -53,6 +53,9 @@ public class MockServer extends JFrame {
                 case 4 -> showList(database.getCategory(Garment.SKIRT));
                 case 5 -> showList(database.getCategory(Garment.DRESS));
             }
+
+             */
+            showSelectedList(category);
         });
         subtractArticle.addActionListener(e -> balanceSubtractor());
 
