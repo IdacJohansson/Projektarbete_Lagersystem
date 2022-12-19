@@ -65,6 +65,5 @@ public class Listener implements MouseListener, FocusListener {
 
     @Override
     public void focusLost(FocusEvent e) {
-        mockServer.setSearchWord(mockServer.getSearchInput().getText());
     }
 }

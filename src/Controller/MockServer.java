@@ -22,7 +22,6 @@ public class MockServer extends JFrame {
     private JButton searchButton;
     private JButton setBalance;
     private JButton lowBalance;
-    private String searchWord;
 
     public MockServer(AccessLevel accessLevel) {
         this.accessLevel = accessLevel;
@@ -164,9 +163,7 @@ public class MockServer extends JFrame {
 
     private boolean checkArticleNrString(String s) {
         if (s.trim().chars().allMatch(Character::isDigit) && s.trim().length() == 7) {
-            if (database.getArticle(s.trim()) != null) {
-                return true;
-            }
+            return database.getArticle(s.trim()) != null;
         }
         return false;
     }
@@ -193,9 +190,5 @@ public class MockServer extends JFrame {
 
     public JTextField getSearchInput() {
         return searchInput;
-    }
-
-    public void setSearchWord(String searchWord) {
-        this.searchWord = searchWord;
     }
 }
