@@ -5,17 +5,18 @@ import java.util.List;
 
 public class Database {
 
+    private static final Database database = new Database();
     protected List<Article> articles;
     protected List<Article> selection;
-    protected ArticleMaker articleMaker;
 
-
-    public Database() {
-        articleMaker = new ArticleMaker(articles);
+    private Database() {
         retrieveList();
         selection = new ArrayList<>();
     }
 
+    public static Database getDatabas(){
+        return database;
+    }
 
     public List<Article> getListOfArtNr() {
         return articles;
@@ -59,8 +60,8 @@ public class Database {
         if (articleList != null) {
             articles = articleList;
         } else {
-
-            articleMaker.setArticlesList();
+            articles = new ArrayList<>();
+            storeList();
         }
     }
 

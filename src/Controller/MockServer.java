@@ -3,8 +3,6 @@ package Controller;
 import Model.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,6 @@ public class MockServer extends JFrame {
     private final AccessLevel accessLevel;
     public final Database database;
     private final Listener listener;
-    private JFrame orderHandler;
     private JPanel mainPanel;
     private JButton putOrder;
     private JTextField searchInput;
@@ -25,7 +22,6 @@ public class MockServer extends JFrame {
     private JButton searchButton;
     private JButton setBalance;
     private JButton lowBalance;
-    private String searchWord;
 
     public MockServer(AccessLevel accessLevel) {
         this.accessLevel = accessLevel;
@@ -35,7 +31,7 @@ public class MockServer extends JFrame {
         }
 
         listener = new Listener(this);
-        database = new Database();
+        database = Database.getDatabas();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
@@ -58,8 +54,16 @@ public class MockServer extends JFrame {
                 case 5 -> showList(database.getCategory(Garment.DRESS));
             }
         });
+        subtractArticle.addActionListener(e -> balanceSubtractor());
+
+        searchButton.addActionListener(e -> searchList());
+
+        setBalance.addActionListener(e -> balanceAdjuster());
+
+        lowBalance.addActionListener(e -> showList(database.getLowBalance()));
+
         putOrder.addActionListener(e -> {
-            orderHandler = new OrderHandler(this, database, this.accessLevel, dropDownMenu.getSelectedIndex());
+            new OrderHandler(this, database, this.accessLevel, dropDownMenu.getSelectedIndex());
             setEnabled(false);
         });
 
@@ -68,81 +72,79 @@ public class MockServer extends JFrame {
             dropDownMenu.setSelectedIndex(0);
         });
 
-
         addArticle.addActionListener(e -> {
             new NewArticle(database, this);
             setEnabled(false);
         });
 
-        subtractArticle.addActionListener(e -> {
-            while (true) {
-                String input = JOptionPane.showInputDialog(null, "Enter article number to remove");
-                if (input == null) {
-                    break;
-                }
-                if (input.trim().chars().allMatch(Character::isDigit) && input.trim().length() == 7) {
-                    if (database.getArticle(input.trim()) != null) {
-                        database.removeArticle(input.trim());
-                        JOptionPane.showMessageDialog(null, "Article was removed");
-                        break;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Article with that number was not found");
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Article number must be 7 digits without space.");
-                }
-            }
-        });
-
-        searchButton.addActionListener(e -> {
-            if (checkArticleNrString(searchInput.getText())) {
-                List<String> articleAsString = new ArrayList<>();
-                articleAsString.add(database.getArticle(searchInput.getText()).toString());
-                DefaultListModel<String> listModel = new DefaultListModel<>();
-                listModel.addAll(articleAsString);
-                textField.setModel(listModel);
-            }
-        });
-
-        setBalance.addActionListener(e -> {
-            String articleString = (String) textField.getSelectedValue();
-            if (articleString != null) {
-                String articleNr = articleString.substring(8, 16);
-                while(true) {
-                    String sum = JOptionPane.showInputDialog(null, "Enter new balance for: " + articleNr);
-                    if (sum == null) {
-                        return;
-                    }
-                    sum = sum.trim();
-                    if ( !sum.isBlank() && sum.chars().allMatch(Character::isDigit) && Integer.parseInt(sum) > 0) {
-                        database.setBalance(articleNr.trim(), Integer.parseInt(sum));
-                        showAll(database.getListOfArtNr());
-                        break;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "balance need to be a digit and can't be negative");
-                    }
-                }
-            }
-        });
-
-        lowBalance.addActionListener(e -> {
-                    showList(database.getLowBalance());
-                });
-
         showAll(database.getListOfArtNr());
         pack();
     }
-    private void butikAccess(){
+
+    private void searchList() {
+        if (checkArticleNrString(searchInput.getText())) {
+            List<String> articleAsString = new ArrayList<>();
+            articleAsString.add(database.getArticle(searchInput.getText()).toString());
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            listModel.addAll(articleAsString);
+            textField.setModel(listModel);
+        }
+    }
+
+    private void balanceSubtractor() {
+        while (true) {
+            String input = JOptionPane.showInputDialog(null, "Enter article number to remove");
+            if (input == null) {
+                break;
+            }
+            if (input.trim().chars().allMatch(Character::isDigit) && input.trim().length() == 7) {
+                if (database.getArticle(input.trim()) != null) {
+                    database.removeArticle(input.trim());
+                    JOptionPane.showMessageDialog(null, "Article was removed");
+                    break;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Article with that number was not found");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Article number must be 7 digits without space.");
+            }
+        }
+    }
+
+    private void balanceAdjuster() {
+        String articleString = (String) textField.getSelectedValue();
+        if (articleString != null) {
+            String articleNr = articleString.substring(8, 16);
+            while (true) {
+                String sum = JOptionPane.showInputDialog(null, "Enter new balance for: " + articleNr);
+                if (sum == null) {
+                    return;
+                }
+                sum = sum.trim();
+                if (!sum.isBlank() && sum.chars().allMatch(Character::isDigit) && Integer.parseInt(sum) > 0) {
+                    database.setBalance(articleNr.trim(), Integer.parseInt(sum));
+                    showAll(database.getListOfArtNr());
+                    break;
+                } else {
+                    JOptionPane.showMessageDialog(null, "balance need to be a digit and can't be negative");
+                }
+            }
+        }
+    }
+
+    private void butikAccess() {
         setBalance.setVisible(false);
         addArticle.setVisible(false);
         subtractArticle.setVisible(false);
+        lowBalance.setVisible(false);
     }
-    private void lagerAccess(){
+
+    private void lagerAccess() {
         putOrder.setVisible(false);
         addArticle.setVisible(false);
         subtractArticle.setVisible(false);
-
+        lowBalance.setVisible(false);
     }
 
     protected void showList(List<Article> articleList) {
@@ -160,11 +162,9 @@ public class MockServer extends JFrame {
         textField.setModel(listModel);
     }
 
-    private boolean checkArticleNrString(String s){
+    private boolean checkArticleNrString(String s) {
         if (s.trim().chars().allMatch(Character::isDigit) && s.trim().length() == 7) {
-            if (database.getArticle(s.trim()) != null) {
-                return true;
-            }
+            return database.getArticle(s.trim()) != null;
         }
         return false;
     }
@@ -191,13 +191,5 @@ public class MockServer extends JFrame {
 
     public JTextField getSearchInput() {
         return searchInput;
-    }
-
-    public String getSearchWord() {
-        return searchWord;
-    }
-
-    public void setSearchWord(String searchWord) {
-        this.searchWord = searchWord;
     }
 }
