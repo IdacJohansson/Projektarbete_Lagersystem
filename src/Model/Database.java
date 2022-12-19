@@ -5,15 +5,18 @@ import java.util.List;
 
 public class Database {
 
+    private static final Database database = new Database();
     protected List<Article> articles;
     protected List<Article> selection;
 
-
-    public Database() {
+    private Database() {
         retrieveList();
         selection = new ArrayList<>();
     }
 
+    public static Database getDatabas(){
+        return database;
+    }
 
     public List<Article> getListOfArtNr() {
         return articles;

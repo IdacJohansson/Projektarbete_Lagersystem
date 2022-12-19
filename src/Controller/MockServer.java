@@ -35,7 +35,7 @@ public class MockServer extends JFrame {
         }
 
         listener = new Listener(this);
-        database = new Database();
+        database = Database.getDatabas();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
