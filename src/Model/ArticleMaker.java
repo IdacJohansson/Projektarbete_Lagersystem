@@ -13,39 +13,43 @@ public class ArticleMaker {
     int balance;
     List<String> artNrList;
 
-    public ArticleMaker(List<Article>articleList){
-        this.articlesList =articleList;
+    public ArticleMaker(List<Article> articleList) {
+        this.articlesList = articleList;
 
         setArtNrList();
     }
 
-    public void setArticlesList(){
-        for (String artNr:artNrList) {
-            balance=100;
-            addOneArticleToList(artNr,balance);
+    public void setArticlesList() {
+        for (String artNr : artNrList) {
+            balance = 100;
+            addOneArticleToList(artNr, balance);
         }
     }
 
-    public void addOneArticleToList (String artNr, int balance){
-        garment=getGarment(artNr.substring(0,1));
-        color=getColor(artNr.substring(1,3));
-        size=getSize(artNr.substring(4));
-        articlesList.add(new Article(artNr,garment,color,size,balance));
+    public void addOneArticleToList(String artNr, int balance) {
+        garment = getGarment(artNr.substring(0, 1));
+        color = getColor(artNr.substring(1, 3));
+        size = getSize(artNr.substring(4,6));
+        articlesList.add(new Article(artNr, garment, color, size, balance));
     }
-    public void removeOneArticleFromList (String artNr){
-        for (Article article:articlesList) {
-            if (article.getArticleNumber().equals(artNr)){
+
+    public void removeOneArticleFromList(String artNr) {
+        for (Article article : articlesList) {
+            if (article.getArticleNumber().equals(artNr)) {
                 articlesList.remove(article);
             }
         }
     }
+
     private void setArtNrList() {
         artNrList = new ArrayList<>();
+        String id;
         String si;
         String sj;
         String sk;
         for (int i = 5; i <= 9; i++) {
             si = String.valueOf(i);
+            id = String.valueOf((int) Math.random() * 100);
             for (int j = 0; j <= 9; j++) {
                 sj = "0" + j;
                 for (int k = 4; k <= 16; k += 2) {
@@ -54,11 +58,15 @@ public class ArticleMaker {
                     } else {
                         sk = " " + k;
                     }
-                    artNrList.add((si + sj + sk));
+                    if (id.length() < 2) {
+                        id = "0" + id;
+                    }
+                    artNrList.add((si + sj + sk + id));
                 }
             }
         }
     }
+
     private Garment getGarment(String s) {
         garment = switch (s) {
             case "5" -> Garment.SWEATER;
