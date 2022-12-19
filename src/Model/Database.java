@@ -11,7 +11,7 @@ public class Database {
 
 
     public Database() {
-
+        articleMaker = new ArticleMaker(articles);
         retrieveList();
         selection = new ArrayList<>();
     }
@@ -59,7 +59,7 @@ public class Database {
         if (articleList != null) {
             articles = articleList;
         } else {
-            articleMaker = new ArticleMaker(articleList);
+
             articleMaker.setArticlesList();
         }
     }
