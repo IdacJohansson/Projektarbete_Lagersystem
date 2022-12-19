@@ -65,7 +65,7 @@
                 </constraints>
                 <properties>
                   <icon value="Pic/MODELAGRET_MINI.png"/>
-                  <text value="Label"/>
+                  <text value=""/>
                   <verticalTextPosition value="1"/>
                 </properties>
               </component>
