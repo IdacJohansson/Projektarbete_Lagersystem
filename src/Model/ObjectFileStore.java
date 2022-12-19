@@ -7,7 +7,7 @@ public class ObjectFileStore {
 
     public static void storeObjectList(List<?> objectList, String fileName){
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
-                "resources/files/" + fileName.trim() + ".ser", true))) {
+                "resources/files/" + fileName.trim() + ".ser", false))) {
             out.writeObject(objectList);
         } catch (IOException e) {
             e.printStackTrace();

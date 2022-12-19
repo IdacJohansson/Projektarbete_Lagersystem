@@ -1,22 +1,14 @@
 package Model;
 
-public class Article {
+import java.io.Serializable;
+
+public class Article implements Serializable {
 
     private final String articleNumber;
     private final Garment garment;
     private final Color color;
     private final Size size;
     private int balance;
-
-    public Article(String articleNumber, Garment garment, Color color, Size size) {      //OBS!! ska tas bort! bara för att kunna testa mina metoder (Anna)
-
-        this.articleNumber = articleNumber;
-        this.garment = garment;
-        this.color = color;
-        this.size = size;
-        this.balance = 3;
-    }
-
 
     public Article(String articleNumber, Garment garment, Color color, Size size, int balance) {
         if (articleNumber == null || articleNumber.isBlank()) {
@@ -33,7 +25,7 @@ public class Article {
         if (balance < 0) {
             throw new IllegalArgumentException("balance can't be negative");
         }
-
+        
         this.articleNumber = cleanString;
         this.garment = garment;
         this.color = color;

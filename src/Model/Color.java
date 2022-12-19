@@ -1,13 +1,14 @@
 package Model;
 
 public enum Color {
-    SVART,
-    VIT,
-    GUL,
+    BLACK,
+    WHITE,
+    GRAY,
+    PINK,
+    RED,
     ORANGE,
-    RÖD,
-    LILA,
-    BLÅ,
-    GRÖN,
-    ROSA
+    YELLOW,
+    GREEN,
+    BLUE,
+    PURPLE
 }
