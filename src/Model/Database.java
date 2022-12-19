@@ -72,6 +72,12 @@ public class Database {
         article.subtractFromBalance(sum);
         storeList();
     }
+
+    public void setBalance(String artNr, int sum) {
+        Article article = getArticle(artNr);
+        article.setBalance(sum);
+        storeList();
+    }
 }
 
 
