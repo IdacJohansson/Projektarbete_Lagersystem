@@ -43,13 +43,13 @@ public class ArticleMaker {
 
     private void setArtNrList() {
         artNrList = new ArrayList<>();
-        String id;
+        int id;
         String si;
         String sj;
         String sk;
         for (int i = 5; i <= 9; i++) {
             si = String.valueOf(i);
-            id = String.valueOf((int) Math.random() * 100);
+            id = (int) (Math.random() * 100);
             for (int j = 0; j <= 9; j++) {
                 sj = "0" + j;
                 for (int k = 4; k <= 16; k += 2) {
@@ -58,8 +58,8 @@ public class ArticleMaker {
                     } else {
                         sk = " " + k;
                     }
-                    if (id.length() < 2) {
-                        id = "0" + id;
+                    if (id < 10) {
+                        sk+="0";
                     }
                     artNrList.add((si + sj + sk + id));
                 }

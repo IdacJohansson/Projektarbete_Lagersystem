@@ -6,8 +6,10 @@ import java.util.List;
 public class Database {
 
     private static final Database database = new Database();
+    private ArticleMaker articleMaker;
     protected List<Article> articles;
     protected List<Article> selection;
+
 
     private Database() {
         retrieveList();
@@ -60,7 +62,9 @@ public class Database {
         if (articleList != null) {
             articles = articleList;
         } else {
-            articles = new ArrayList<>();
+            articles=new ArrayList<>();
+            articleMaker = new ArticleMaker(articles);
+            articleMaker.setArticlesList();
             storeList();
         }
     }
