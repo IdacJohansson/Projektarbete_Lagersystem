@@ -53,6 +53,7 @@ public class OrderHandler extends JFrame {
                     try {
                         database.subtractBalance(artNr, antal);
                         bekräftelse.setText("Beställning skickad");
+                        System.out.println("Email sent to warehouse");
                     } catch (IllegalArgumentException e) {
                         if (e.getMessage().contains("negative")) {
                             felAntalLabel.setText("Antal måste vara större än 0");
@@ -64,6 +65,7 @@ public class OrderHandler extends JFrame {
                     try {
                         database.addBalance(artNr, antal);
                         bekräftelse.setText("Beställning skickad");
+                        System.out.println("Order sent to manufacturer");
                     } catch (IllegalArgumentException e) {
                         felAntalLabel.setText("Antal måste vara större än 0");
                     }
