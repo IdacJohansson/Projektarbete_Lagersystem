@@ -3,6 +3,8 @@ package Controller;
 import Model.*;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class MockServer extends JFrame {
     private JButton showAllButton;
     private JButton searchButton;
     private JButton setBalance;
+    private JButton lowBalance;
     private String searchWord;
 
     public MockServer(AccessLevel accessLevel) {
@@ -122,6 +125,10 @@ public class MockServer extends JFrame {
                 }
             }
         });
+
+        lowBalance.addActionListener(e -> {
+                    showList(database.getLowBalance());
+                });
 
         showAll(database.getListOfArtNr());
         pack();

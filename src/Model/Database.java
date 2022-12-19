@@ -6,12 +6,12 @@ import java.util.List;
 public class Database {
 
     protected List<Article> articles;
-    protected List<Article> oneCategory;
+    protected List<Article> selection;
 
 
     public Database() {
         retrieveList();
-        oneCategory = new ArrayList<>();
+        selection = new ArrayList<>();
     }
 
 
@@ -20,12 +20,13 @@ public class Database {
     }
 
     public List<Article> getCategory(Garment garment) {
+        selection.clear();
         for (Article a : articles) {
             if (a.getGarment().equals(garment)) {
-                oneCategory.add(a);
+                selection.add(a);
             }
         }
-        return oneCategory;
+        return selection;
     }
 
     public Article getArticle(String artNumb) {
@@ -35,6 +36,15 @@ public class Database {
             }
         }
         return null;
+    }
+    public List<Article> getLowBalance() {
+        selection.clear();
+        for (Article a : articles) {
+            if (a.getBalance() < 10) {
+                selection.add(a);
+            }
+        }
+        return selection;
     }
 
     private void storeList() {
