@@ -63,7 +63,7 @@ public class MockServer extends JFrame {
 
         setBalance.addActionListener(e -> balanceAdjuster());
 
-        lowBalance.addActionListener(e -> showList(database.getLowBalance()));
+        lowBalance.addActionListener(e -> showSelectedList(6));
 
         putOrder.addActionListener(e -> {
             new OrderHandler(this, database, this.accessLevel, dropDownMenu.getSelectedIndex());
@@ -163,6 +163,7 @@ public class MockServer extends JFrame {
             case 3 -> (database.getCategory(Garment.T_SHIRT));
             case 4 -> (database.getCategory(Garment.SKIRT));
             case 5 -> (database.getCategory(Garment.DRESS));
+            case 6 -> (database.getLowBalance());
             default -> throw new IllegalStateException("Unexpected value: " + category);
         };
         showAll(articleList);
