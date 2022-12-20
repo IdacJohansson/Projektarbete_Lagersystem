@@ -21,7 +21,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="36240" class="javax.swing.JButton" binding="butik">
+          <component id="36240" class="javax.swing.JButton" binding="storeButton">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -29,10 +29,10 @@
               <background color="-11119018"/>
               <font name="Andale Mono"/>
               <foreground color="-1"/>
-              <text value="Butik"/>
+              <text value="Store"/>
             </properties>
           </component>
-          <component id="c2102" class="javax.swing.JButton" binding="lager">
+          <component id="c2102" class="javax.swing.JButton" binding="warehouse">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -40,10 +40,10 @@
               <background color="-11119018"/>
               <font name="Andale Mono"/>
               <foreground color="-1"/>
-              <text value="Lager"/>
+              <text value="Warehouse"/>
             </properties>
           </component>
-          <component id="40648" class="javax.swing.JButton" binding="inköp">
+          <component id="40648" class="javax.swing.JButton" binding="purchase">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -51,17 +51,17 @@
               <background color="-11119018"/>
               <font name="Andale Mono"/>
               <foreground color="-1"/>
-              <text value="Inköp"/>
+              <text value="Purchase department"/>
             </properties>
           </component>
-          <component id="bd7d8" class="javax.swing.JLabel" binding="Text">
+          <component id="bd7d8" class="javax.swing.JLabel" binding="headLine">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="Andale Mono" size="14" style="0"/>
               <foreground color="-16777216"/>
-              <text value="Välj avdelning:"/>
+              <text value="Choose department"/>
             </properties>
           </component>
           <component id="5274c" class="javax.swing.JLabel" binding="headLogo">

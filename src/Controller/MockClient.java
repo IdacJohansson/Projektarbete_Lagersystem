@@ -9,10 +9,10 @@ import javax.swing.*;
 public class MockClient extends JFrame {
     private JPanel mainPanel;
     private JPanel Panel2;
-    private JButton butik;
-    private JButton lager;
-    private JLabel Text;
-    private JButton inköp;
+    private JButton storeButton;
+    private JButton warehouse;
+    private JLabel headLine;
+    private JButton purchase;
     private JLabel headLogo;
     private JFrame mockServer;
 
@@ -24,19 +24,19 @@ public class MockClient extends JFrame {
         setLocationRelativeTo(null);
         pack();
 
-        butik.addActionListener(e -> {
-            if (butik == e.getSource()) {
+        storeButton.addActionListener(e -> {
+            if (storeButton == e.getSource()) {
                 mockServer = new MockServer(AccessLevel.STORE);
                 dispose();
             }
         });
 
-        lager.addActionListener(e -> {
+        warehouse.addActionListener(e -> {
             mockServer = new MockServer(AccessLevel.WAREHOUSE);
             dispose();
         });
 
-        inköp.addActionListener(e -> {
+        purchase.addActionListener(e -> {
             mockServer = new MockServer(AccessLevel.PURCHASE_DEPARTMENT);
             dispose();
         });
