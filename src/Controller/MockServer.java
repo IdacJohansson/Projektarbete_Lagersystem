@@ -166,6 +166,7 @@ public class MockServer extends JFrame {
             default -> throw new IllegalStateException("Unexpected value: " + category);
         };
         showAll(articleList);
+        articleList.clear();
     }
 
     protected void showAll(List<Article> articleList) {

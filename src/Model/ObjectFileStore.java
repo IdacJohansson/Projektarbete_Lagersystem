@@ -5,16 +5,7 @@ import java.util.List;
 
 public class ObjectFileStore {
 
-    private static final ObjectFileStore objectFileStore = new ObjectFileStore();
-
-    private ObjectFileStore(){
-    }
-
-    public static ObjectFileStore getObjectFileStore() {
-        return objectFileStore;
-    }
-
-    public void storeObjectList(List<?> objectList, String fileName){
+    public static void storeObjectList(List<?> objectList, String fileName){
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
                 "resources/files/" + fileName.trim() + ".ser", false))) {
             out.writeObject(objectList);
@@ -23,7 +14,7 @@ public class ObjectFileStore {
         }
     }
 
-    public List<?> retrieveObjectList(String fileName){
+    public static List<?> retrieveObjectList(String fileName){
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(
                 "resources/files/" + fileName.trim() + ".ser"))) {
             return (List<?>) in.readObject();
