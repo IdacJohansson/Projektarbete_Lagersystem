@@ -26,18 +26,18 @@ public class MockClient extends JFrame {
 
         butik.addActionListener(e -> {
             if (butik == e.getSource()) {
-                mockServer = new MockServer(AccessLevel.BUTIK);
+                mockServer = new MockServer(AccessLevel.STORE);
                 dispose();
             }
         });
 
         lager.addActionListener(e -> {
-            mockServer = new MockServer(AccessLevel.LAGER);
+            mockServer = new MockServer(AccessLevel.WAREHOUSE);
             dispose();
         });
 
         inköp.addActionListener(e -> {
-            mockServer = new MockServer(AccessLevel.INKÖP);
+            mockServer = new MockServer(AccessLevel.PURCHASE_DEPARTMENT);
             dispose();
         });
     }

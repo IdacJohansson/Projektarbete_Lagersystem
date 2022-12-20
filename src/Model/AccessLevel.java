@@ -1,6 +1,6 @@
 package Model;
 
 public enum AccessLevel {
-    BUTIK, INKÖP, LAGER
+    STORE, PURCHASE_DEPARTMENT, WAREHOUSE
 
 }

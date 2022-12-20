@@ -16,11 +16,11 @@ public class Database {
         selection = new ArrayList<>();
     }
 
-    public static Database getDatabas(){
+    public static Database getDatabase(){
         return database;
     }
 
-    public List<Article> getListOfArtNr() {
+    public List<Article> getAllArticles() {
         return articles;
     }
 

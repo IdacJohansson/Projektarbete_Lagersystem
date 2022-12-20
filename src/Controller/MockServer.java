@@ -26,12 +26,12 @@ public class MockServer extends JFrame {
     public MockServer(AccessLevel accessLevel) {
         this.accessLevel = accessLevel;
         switch (accessLevel) {
-            case BUTIK -> butikAccess();
-            case LAGER -> lagerAccess();
+            case STORE -> butikAccess();
+            case WAREHOUSE -> lagerAccess();
         }
 
         listener = new Listener(this);
-        database = Database.getDatabas();
+        database = Database.getDatabase();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(mainPanel);
@@ -45,16 +45,6 @@ public class MockServer extends JFrame {
         searchInput.addFocusListener(listener);
         dropDownMenu.addActionListener(e -> {
             int category = dropDownMenu.getSelectedIndex();
-            /*switch (category) {
-                case 0 -> showAll(database.getListOfArtNr());
-                case 1 -> showList(database.getCategory(Garment.SWEATER));
-                case 2 -> showList(database.getCategory(Garment.TROUSER));
-                case 3 -> showList(database.getCategory(Garment.T_SHIRT));
-                case 4 -> showList(database.getCategory(Garment.SKIRT));
-                case 5 -> showList(database.getCategory(Garment.DRESS));
-            }
-
-             */
             showSelectedList(category);
         });
         subtractArticle.addActionListener(e -> balanceSubtractor());
@@ -63,7 +53,8 @@ public class MockServer extends JFrame {
 
         setBalance.addActionListener(e -> balanceAdjuster());
 
-        lowBalance.addActionListener(e -> showSelectedList(6));
+        lowBalance.addActionListener(e ->
+                showSelectedList(6));
 
         putOrder.addActionListener(e -> {
             new OrderHandler(this, database, this.accessLevel, dropDownMenu.getSelectedIndex());
@@ -71,7 +62,7 @@ public class MockServer extends JFrame {
         });
 
         showAllButton.addActionListener(e -> {
-            showAll(database.getListOfArtNr());
+            showAll(database.getAllArticles());
             dropDownMenu.setSelectedIndex(0);
         });
 
@@ -80,7 +71,7 @@ public class MockServer extends JFrame {
             setEnabled(false);
         });
 
-        showAll(database.getListOfArtNr());
+        showAll(database.getAllArticles());
         pack();
     }
 
@@ -157,7 +148,7 @@ public class MockServer extends JFrame {
 
     protected void showSelectedList (int category){
         List<Article> articleList= switch (category) {
-            case 0 -> (database.getListOfArtNr());
+            case 0 -> (database.getAllArticles());
             case 1 -> (database.getCategory(Garment.SWEATER));
             case 2 -> (database.getCategory(Garment.TROUSER));
             case 3 -> (database.getCategory(Garment.T_SHIRT));
@@ -167,7 +158,6 @@ public class MockServer extends JFrame {
             default -> throw new IllegalStateException("Unexpected value: " + category);
         };
         showAll(articleList);
-        articleList.clear();
     }
 
     protected void showAll(List<Article> articleList) {

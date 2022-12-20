@@ -1,9 +1,7 @@
 package Controller;
 
 import Model.AccessLevel;
-import Model.Article;
 import Model.Database;
-import Model.Garment;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -14,17 +12,17 @@ public class OrderHandler extends JFrame {
     private JPanel panel2;
     private JLabel headLine;
     private JTextField artNrField;
-    private JButton skicka;
+    private JButton send;
     private JLabel artNrLabel;
-    private JTextField antalField;
-    private JLabel antalLabel;
+    private JTextField amountField;
+    private JLabel amountLabel;
 
-    private JLabel felAntalLabel;
-    private JLabel felArtNrLabel;
-    private JButton stäng;
-    private JLabel bekräftelse;
+    private JLabel wrongAmountLabel;
+    private JLabel wrongArtNrLabel;
+    private JButton returnButton;
+    private JLabel confirmation;
     private String artNr;
-    private int antal;
+    private int amount;
 
     private final Database database;
     private AccessLevel accessLevel;
@@ -41,41 +39,41 @@ public class OrderHandler extends JFrame {
         setContentPane(panel1);
         pack();
 
-        skicka.addActionListener(ae -> {
-            felArtNrLabel.setText("");
-            felAntalLabel.setText("");
-            bekräftelse.setText("");
+        send.addActionListener(ae -> {
+            wrongArtNrLabel.setText("");
+            wrongAmountLabel.setText("");
+            confirmation.setText("");
 
             artNr = artNrField.getText().trim();
-            antal = Integer.parseInt(antalField.getText().trim());
+            amount = Integer.parseInt(amountField.getText().trim());
             if (database.getArticle(artNr) != null) {
-                if (accessLevel == AccessLevel.BUTIK) {
+                if (accessLevel == AccessLevel.STORE) {
                     try {
-                        database.subtractBalance(artNr, antal);
-                        bekräftelse.setText("Beställning skickad");
+                        database.subtractBalance(artNr, amount);
+                        confirmation.setText("Order sent successfully");
                         System.out.println("Email sent to warehouse");
                     } catch (IllegalArgumentException e) {
                         if (e.getMessage().contains("negative")) {
-                            felAntalLabel.setText("Antal måste vara större än 0");
+                            wrongAmountLabel.setText("Amount must be greater than 0");
                         } else if (e.getMessage().contains("larger")) {
-                            felAntalLabel.setText("Det finns inte så många exemplar på lagret");
+                            wrongAmountLabel.setText("Order is too large");
                         }
                     }
-                } else if (accessLevel == AccessLevel.INKÖP) {
+                } else if (accessLevel == AccessLevel.PURCHASE_DEPARTMENT) {
                     try {
-                        database.addBalance(artNr, antal);
-                        bekräftelse.setText("Beställning skickad");
+                        database.addBalance(artNr, amount);
+                        confirmation.setText("Order sent successfully");
                         System.out.println("Order sent to manufacturer");
                     } catch (IllegalArgumentException e) {
-                        felAntalLabel.setText("Antal måste vara större än 0");
+                        wrongAmountLabel.setText("Amount must be greater than 0");
                     }
                 }
             } else {
-                felArtNrLabel.setText("Inget plagg med artikelnumret finns");
+                wrongArtNrLabel.setText("Article does not exist");
             }
 
         });
-        stäng.addActionListener(e -> {
+        returnButton.addActionListener(e -> {
             mockServer.setEnabled(true);
             mockServer.showSelectedList(categoryShown);
             dispose();

@@ -25,7 +25,7 @@
             <properties>
               <font name="Andale Mono" size="20" style="1"/>
               <foreground color="-16777216"/>
-              <text value="Beställning av vara"/>
+              <text value="Place an order"/>
             </properties>
           </component>
           <component id="55d26" class="javax.swing.JTextField" binding="artNrField">
@@ -36,17 +36,17 @@
             </constraints>
             <properties/>
           </component>
-          <component id="a205b" class="javax.swing.JLabel" binding="antalLabel">
+          <component id="a205b" class="javax.swing.JLabel" binding="amountLabel">
             <constraints>
               <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="Andale Mono" size="11" style="1"/>
               <foreground color="-1"/>
-              <text value="Ange antal:"/>
+              <text value="Specify amount:"/>
             </properties>
           </component>
-          <component id="d9d83" class="javax.swing.JTextField" binding="antalField">
+          <component id="d9d83" class="javax.swing.JTextField" binding="amountField">
             <constraints>
               <grid row="3" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -54,7 +54,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="fb449" class="javax.swing.JButton" binding="skicka">
+          <component id="fb449" class="javax.swing.JButton" binding="send">
             <constraints>
               <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -62,10 +62,10 @@
               <font name="SansSerif" style="1"/>
               <foreground color="-1"/>
               <horizontalAlignment value="0"/>
-              <text value="Skicka beställning"/>
+              <text value="Send order"/>
             </properties>
           </component>
-          <component id="4f482" class="javax.swing.JLabel" binding="felArtNrLabel">
+          <component id="4f482" class="javax.swing.JLabel" binding="wrongArtNrLabel">
             <constraints>
               <grid row="2" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -74,7 +74,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="9109e" class="javax.swing.JLabel" binding="felAntalLabel">
+          <component id="9109e" class="javax.swing.JLabel" binding="wrongAmountLabel">
             <constraints>
               <grid row="4" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -83,14 +83,14 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="b8525" class="javax.swing.JButton" binding="stäng">
+          <component id="b8525" class="javax.swing.JButton" binding="returnButton">
             <constraints>
               <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="SansSerif" style="1"/>
               <foreground color="-1"/>
-              <text value="Stäng beställningsformulär"/>
+              <text value="Close order form"/>
             </properties>
           </component>
           <component id="cde11" class="javax.swing.JLabel" binding="artNrLabel">
@@ -100,10 +100,10 @@
             <properties>
               <font name="Andale Mono" size="11" style="1"/>
               <foreground color="-1"/>
-              <text value="Ange artikelnummer:"/>
+              <text value="Specify article number:"/>
             </properties>
           </component>
-          <component id="8e1b2" class="javax.swing.JLabel" binding="bekräftelse">
+          <component id="8e1b2" class="javax.swing.JLabel" binding="confirmation">
             <constraints>
               <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>

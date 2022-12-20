@@ -38,7 +38,7 @@ public class NewArticle extends JFrame {
                                     JOptionPane.showMessageDialog(null, ex);
                                 }
                                 dispose();
-                                mockServer.showAll(database.getListOfArtNr());
+                                mockServer.showAll(database.getAllArticles());
                                 mockServer.setEnabled(true);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Balance can't be negative");

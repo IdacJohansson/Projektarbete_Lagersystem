@@ -78,6 +78,6 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
-        return "Art NR: " + articleNumber + " - " + garment + " " + color + " " + size + " Saldo: " + balance;
+        return "Art NR: " + articleNumber + " - " + garment + " " + color + " " + size + " Balance: " + balance;
     }
 }
