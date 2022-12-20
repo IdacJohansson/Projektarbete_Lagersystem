@@ -6,6 +6,7 @@ import java.util.List;
 public class Database {
 
     private static final Database database = new Database();
+    private final ObjectFileStore objectFileStore;
     private ArticleMaker articleMaker;
     protected List<Article> articles;
     protected List<Article> selection;
@@ -14,6 +15,7 @@ public class Database {
     private Database() {
         retrieveList();
         selection = new ArrayList<>();
+        objectFileStore = ObjectFileStore.getObjectFileStore();
     }
 
     public static Database getDatabas(){
@@ -53,12 +55,12 @@ public class Database {
     }
 
     private void storeList() {
-        ObjectFileStore.storeObjectList(articles, "articles");
+        objectFileStore.storeObjectList(articles, "articles");
     }
 
     @SuppressWarnings("unchecked")
     private void retrieveList() {
-        List<Article> articleList = (List<Article>) ObjectFileStore.retrieveObjectList("articles");
+        List<Article> articleList = (List<Article>) objectFileStore.retrieveObjectList("articles");
         if (articleList != null) {
             articles = articleList;
         } else {
