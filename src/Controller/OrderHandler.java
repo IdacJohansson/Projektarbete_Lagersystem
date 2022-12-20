@@ -45,33 +45,34 @@ public class OrderHandler extends JFrame {
             confirmation.setText("");
 
             artNr = artNrField.getText().trim();
-            amount = Integer.parseInt(amountField.getText().trim());
-            if (database.getArticle(artNr) != null) {
-                if (accessLevel == AccessLevel.STORE) {
-                    try {
-                        database.subtractBalance(artNr, amount);
-                        confirmation.setText("Order sent successfully");
-                        System.out.println("Email sent to warehouse");
-                    } catch (IllegalArgumentException e) {
-                        if (e.getMessage().contains("negative")) {
+            if (!amountField.getText().isBlank() && amountField.getText().chars().allMatch(Character::isDigit)) {
+                amount = Integer.parseInt(amountField.getText().trim());
+                if (database.getArticle(artNr) != null) {
+                    if (accessLevel == AccessLevel.STORE) {
+                        try {
+                            database.subtractBalance(artNr, amount);
+                            confirmation.setText("Order sent successfully");
+                            System.out.println("Email sent to warehouse");
+                        } catch (IllegalArgumentException e) {
+                            if (e.getMessage().contains("negative")) {
+                                wrongAmountLabel.setText("Amount must be greater than 0");
+                            } else if (e.getMessage().contains("larger")) {
+                                wrongAmountLabel.setText("Order is too large");
+                            }
+                        }
+                    } else if (accessLevel == AccessLevel.PURCHASE_DEPARTMENT) {
+                        try {
+                            database.addBalance(artNr, amount);
+                            confirmation.setText("Order sent successfully");
+                            System.out.println("Order sent to manufacturer");
+                        } catch (IllegalArgumentException e) {
                             wrongAmountLabel.setText("Amount must be greater than 0");
-                        } else if (e.getMessage().contains("larger")) {
-                            wrongAmountLabel.setText("Order is too large");
                         }
                     }
-                } else if (accessLevel == AccessLevel.PURCHASE_DEPARTMENT) {
-                    try {
-                        database.addBalance(artNr, amount);
-                        confirmation.setText("Order sent successfully");
-                        System.out.println("Order sent to manufacturer");
-                    } catch (IllegalArgumentException e) {
-                        wrongAmountLabel.setText("Amount must be greater than 0");
-                    }
+                } else {
+                    wrongArtNrLabel.setText("Article does not exist");
                 }
-            } else {
-                wrongArtNrLabel.setText("Article does not exist");
             }
-
         });
         returnButton.addActionListener(e -> {
             mockServer.setEnabled(true);

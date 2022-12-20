@@ -60,7 +60,7 @@
             </constraints>
             <properties>
               <font name="SansSerif" style="1"/>
-              <foreground color="-1"/>
+              <foreground color="-12513268"/>
               <horizontalAlignment value="0"/>
               <text value="Send order"/>
             </properties>
@@ -89,7 +89,7 @@
             </constraints>
             <properties>
               <font name="SansSerif" style="1"/>
-              <foreground color="-1"/>
+              <foreground color="-12513268"/>
               <text value="Close order form"/>
             </properties>
           </component>
