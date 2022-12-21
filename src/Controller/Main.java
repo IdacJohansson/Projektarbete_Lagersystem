@@ -1,18 +1,9 @@
 package Controller;
 
-import Model.StartClient;
-
-import javax.swing.*;
-
-public class Main implements StartClient {
+public class Main {
 
     public static void main(String[] args) {
-        Main main = new Main();
-        main.startClient();
+        MockClient client = new MockClient();
     }
 
-    @Override
-    public void startClient() {
-        JFrame mockGUI = new MockClient();
-    }
 }
