@@ -25,15 +25,17 @@ public class OrderHandler extends JFrame {
     private int amount;
 
     private final Database database;
+    private TaskController taskController;
     private AccessLevel accessLevel;
     private JFrame mockServer;
     int categoryShown;
 
-    public OrderHandler(MockServer mockServer, Database database, AccessLevel accessLevel, int category) {  //tar in mockserverns accesslevel
+    public OrderHandler(MockServer mockServer, Database database, AccessLevel accessLevel, int category,TaskController taskController) {  //tar in mockserverns accesslevel
         this.mockServer = mockServer;
         this.accessLevel = accessLevel;
         this.database = database;
         this.categoryShown = category;
+        this.taskController=taskController;
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setContentPane(panel1);
@@ -50,7 +52,9 @@ public class OrderHandler extends JFrame {
                 if (database.getArticle(artNr) != null) {
                     if (accessLevel == AccessLevel.STORE) {
                         try {
-                            database.subtractBalance(artNr, amount);
+                            //database.subtractBalance(artNr, amount);
+                            amount= -amount;
+                            taskController.addToList(artNr,amount);
                             confirmation.setText("Order sent successfully");
                             System.out.println("Email sent to warehouse");
                         } catch (IllegalArgumentException e) {
@@ -62,7 +66,8 @@ public class OrderHandler extends JFrame {
                         }
                     } else if (accessLevel == AccessLevel.PURCHASE_DEPARTMENT) {
                         try {
-                            database.addBalance(artNr, amount);
+                            //database.addBalance(artNr, amount);
+                            taskController.addToList(artNr,amount);
                             confirmation.setText("Order sent successfully");
                             System.out.println("Order sent to manufacturer");
                         } catch (IllegalArgumentException e) {

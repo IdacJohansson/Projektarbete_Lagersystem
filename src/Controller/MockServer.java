@@ -3,6 +3,8 @@ package Controller;
 import Model.*;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class MockServer extends JFrame {
     private final AccessLevel accessLevel;
     public final Database database;
     private final Listener listener;
+    private TaskController taskController;
     private JPanel mainPanel;
     private JButton putOrder;
     private JTextField searchInput;
@@ -22,14 +25,17 @@ public class MockServer extends JFrame {
     private JButton searchButton;
     private JButton setBalance;
     private JButton lowBalance;
+    private JButton todoList;
+    private JButton completeTask;
 
     public MockServer(AccessLevel accessLevel) {
         this.accessLevel = accessLevel;
         switch (accessLevel) {
             case STORE -> butikAccess();
             case WAREHOUSE -> lagerAccess();
+            case PURCHASE_DEPARTMENT -> purchaseAccess();
         }
-
+        taskController=new TaskController();
         listener = new Listener(this);
         database = Database.getDatabase();
         setVisible(true);
@@ -57,7 +63,7 @@ public class MockServer extends JFrame {
                 showSelectedList(6));
 
         putOrder.addActionListener(e -> {
-            new OrderHandler(this, database, this.accessLevel, dropDownMenu.getSelectedIndex());
+            new OrderHandler(this, database, this.accessLevel, dropDownMenu.getSelectedIndex(),taskController);
             setEnabled(false);
         });
 
@@ -73,6 +79,17 @@ public class MockServer extends JFrame {
 
         showAll(database.getAllArticles());
         pack();
+        todoList.addActionListener(e -> {
+            showTODO(taskController.getTodoList());
+        });
+        completeTask.addActionListener(e -> {
+            String idString = (String) textField.getSelectedValue();
+            idString = idString.substring(1, idString.indexOf(':'));
+            int id = Integer.parseInt(idString.trim());
+            if (idString != null) {
+                taskController.markComplete(id);
+            }
+        });
     }
 
     private void searchList() {
@@ -132,6 +149,8 @@ public class MockServer extends JFrame {
         addArticle.setVisible(false);
         subtractArticle.setVisible(false);
         lowBalance.setVisible(false);
+        todoList.setVisible(false);
+        completeTask.setVisible(false);
     }
 
     private void lagerAccess() {
@@ -139,6 +158,12 @@ public class MockServer extends JFrame {
         addArticle.setVisible(false);
         subtractArticle.setVisible(false);
         lowBalance.setVisible(false);
+        todoList.setVisible(true);
+        completeTask.setVisible(true);
+    }
+    private void purchaseAccess() {
+        todoList.setVisible(false);
+        completeTask.setVisible(false);
     }
 
     protected void showList(List<Article> articleList) {
@@ -167,6 +192,16 @@ public class MockServer extends JFrame {
         }
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listModel.addAll(articlesAsString);
+        textField.setModel(listModel);
+    }
+
+    protected void showTODO(List<Order> todoList){
+        List<String> orderAsString = new ArrayList<>();
+        for (Order order:todoList) {
+            orderAsString.add(order.toString());
+        }
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        listModel.addAll(orderAsString);
         textField.setModel(listModel);
     }
 
