@@ -89,6 +89,7 @@ public class MockServer extends JFrame {
             if (idString != null) {
                 taskController.markComplete(id);
             }
+            showTODO(taskController.getTodoList());
         });
     }
 
@@ -149,8 +150,8 @@ public class MockServer extends JFrame {
         addArticle.setVisible(false);
         subtractArticle.setVisible(false);
         lowBalance.setVisible(false);
-        todoList.setVisible(false);
-        completeTask.setVisible(false);
+        todoList.setVisible(true);
+        completeTask.setVisible(true);
     }
 
     private void lagerAccess() {
@@ -162,8 +163,8 @@ public class MockServer extends JFrame {
         completeTask.setVisible(true);
     }
     private void purchaseAccess() {
-        todoList.setVisible(false);
-        completeTask.setVisible(false);
+        todoList.setVisible(true);
+        completeTask.setVisible(true);
     }
 
     protected void showList(List<Article> articleList) {

@@ -9,17 +9,21 @@ public class ObjectFileStore {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
                 "resources/files/" + fileName.trim() + ".ser", false))) {
             out.writeObject(objectList);
+            System.out.println("storelist tried");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("storelist caught");
+            //e.printStackTrace();
         }
     }
 
     public static List<?> retrieveObjectList(String fileName){
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(
                 "resources/files/" + fileName.trim() + ".ser"))) {
+            System.out.println("retrievelist tried");
             return (List<?>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("retrievelist caught");
+            //e.printStackTrace();
         }
         return null;
     }

@@ -71,7 +71,7 @@ public class Article implements Serializable {
         if (number < 0) {
             throw new IllegalArgumentException("your withdraw can't be negative");
         } else if (balance - number < 0) {
-            throw new IllegalArgumentException("your withdraw is larger then the balance");
+            throw new IllegalArgumentException("your withdraw is larger than the balance");
         }
         balance = balance - number;
     }

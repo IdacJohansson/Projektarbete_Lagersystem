@@ -52,11 +52,13 @@ public class OrderHandler extends JFrame {
                 if (database.getArticle(artNr) != null) {
                     if (accessLevel == AccessLevel.STORE) {
                         try {
-                            //database.subtractBalance(artNr, amount);
+
+                            if (database.getArticle(artNr).getBalance()>=amount){
                             amount= -amount;
                             taskController.addToList(artNr,amount);
                             confirmation.setText("Order sent successfully");
                             System.out.println("Email sent to warehouse");
+                            }
                         } catch (IllegalArgumentException e) {
                             if (e.getMessage().contains("negative")) {
                                 wrongAmountLabel.setText("Amount must be greater than 0");
@@ -66,7 +68,7 @@ public class OrderHandler extends JFrame {
                         }
                     } else if (accessLevel == AccessLevel.PURCHASE_DEPARTMENT) {
                         try {
-                            //database.addBalance(artNr, amount);
+
                             taskController.addToList(artNr,amount);
                             confirmation.setText("Order sent successfully");
                             System.out.println("Order sent to manufacturer");
